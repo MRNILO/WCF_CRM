@@ -2980,7 +2980,7 @@ Public Class Service1
 
     Function DiasSinTrabajarEtapaFiltro(ByVal id_supervisor As Integer, ByVal Etapa As Integer, ByVal Dias As Integer, ByVal FechaInicio As Date, ByVal FechaFinal As Date) As List(Of DiasSinTrabajar) Implements IService1.DiasSinTrabajarEtapaFiltro
         Dim Resultado As New List(Of DiasSinTrabajar)
-        Dim cmd As New SqlCommand("DiasSinTrabajarEtapaJorge", Conexion)
+        Dim cmd As New SqlCommand("DiasSinTrabajarEtapaFiltro", Conexion)
 
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@idSupervisor", id_supervisor)
