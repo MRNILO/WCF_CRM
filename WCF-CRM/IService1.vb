@@ -294,6 +294,8 @@ Public Interface IService1
     <OperationContract()>
     Function DiasSinTrabajarEtapa(ByVal id_supervisor As Integer, ByVal Etapa As Integer) As List(Of DiasSinTrabajar)
     <OperationContract()>
+    Function DiasSinTrabajarEtapaFiltro(ByVal id_supervisor As Integer, ByVal Etapa As Integer, ByVal Dias As Integer, ByVal FechaInicio As Date, ByVal FechaFinal As Date) As List(Of DiasSinTrabajar)
+    <OperationContract()>
     Function DiasSinTrabajarFiltro(ByVal id_supervisor As Integer, ByVal Filtro As String) As List(Of DiasSinTrabajar)
     <OperationContract()>
     Function Obtener_supervisor_Detalles(ByVal id_supervisor As Integer) As CDetallesSupervisor

@@ -2977,6 +2977,37 @@ Public Class Service1
 
         Return Resultado
     End Function
+
+    Function DiasSinTrabajarEtapaFiltro(ByVal id_supervisor As Integer, ByVal Etapa As Integer, ByVal Dias As Integer, ByVal FechaInicio As Date, ByVal FechaFinal As Date) As List(Of DiasSinTrabajar) Implements IService1.DiasSinTrabajarEtapaFiltro
+        Dim Resultado As New List(Of DiasSinTrabajar)
+        Dim cmd As New SqlCommand("DiasSinTrabajarEtapaJorge", Conexion)
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@idSupervisor", id_supervisor)
+        cmd.Parameters.AddWithValue("@Etapa", Etapa)
+        cmd.Parameters.AddWithValue("@Dias", Dias)
+        cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+        cmd.Parameters.AddWithValue("@FechaFin", FechaFinal)
+
+        Conexion.Close()
+        Conexion.Open()
+
+        Dim reader As SqlDataReader = cmd.ExecuteReader
+        Dim Aux As DiasSinTrabajar
+        While reader.Read
+            Aux = New DiasSinTrabajar
+            Aux.ID = DirectCast(reader.Item("ID"), Integer)
+            Aux.Cliente = DirectCast(reader.Item("Cliente"), String)
+            Aux.Ultima = reader.Item("Ultima")
+            Aux.Dias = DirectCast(reader.Item("Dias"), Integer)
+            Resultado.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return Resultado
+    End Function
+
+
     Function DiasSinTrabajarFiltro(ByVal id_supervisor As Integer, ByVal Filtro As String) As List(Of DiasSinTrabajar) Implements IService1.DiasSinTrabajarFiltro
         Dim Resultado As New List(Of DiasSinTrabajar)
         Dim cmd As New SqlCommand("DiasSinTrabajarFiltro", Conexion)
