@@ -571,6 +571,7 @@ Public Class CLlamadasFechas
     <DataMember()>
     Public ObservacionUsuario As String
 End Class
+
 <DataContract()>
 Public Class CConfiguracionEmail
     <DataMember(Order:=0)>
@@ -671,6 +672,7 @@ Public Class CDetallesSupervisor
     Public fechaCreacion As Date = New Date
 
 End Class
+
 <DataContract()>
 Public Class CDetallesProducto
     <DataMember()>
@@ -728,6 +730,7 @@ Public Class CObservacionesCita
     <DataMember()>
     Public Observaciones As String
 End Class
+
 <DataContract()>
 Public Class CDetallesEmailCita
     <DataMember()>
@@ -819,6 +822,7 @@ Public Class CLlamadasPAvisar
     Public EmailUsuario As String
     Public id_llamada As Integer
 End Class
+
 <DataContract()>
 Public Class DiasSinTrabajar
     <DataMember()>
@@ -1041,6 +1045,7 @@ Public Class CTotalesUsuario
     Public ClientesTotal As Integer
 
 End Class
+
 <DataContract()>
 Public Class CTelefonosmodifica
     <DataMember()>
@@ -1107,6 +1112,7 @@ Public Class COperacionesCliente
     <DataMember()>
     Public Producto As String
 End Class
+
 <DataContract()>
 Public Class CEtapasDetalles
     <DataMember()>
@@ -1152,6 +1158,7 @@ Public Class CLlamadasCliente
     <DataMember()>
     Public Calificacion As String
 End Class
+
 <DataContract()>
 Public Class CNombresCliente
     <DataMember()>
@@ -1223,6 +1230,7 @@ Public Class CUsuarios
     <DataMember()>
     Public Nivel As Integer = 0
 End Class
+
 <DataContract()>
 Public Class CTipoReferencia
     <DataMember()>
@@ -1472,7 +1480,6 @@ Public Class CProductos
     Public Observaciones As String
 End Class
 
-
 <DataContract()>
 Public Class CNivelInteres
     <DataMember()>
@@ -1480,7 +1487,6 @@ Public Class CNivelInteres
     <DataMember()>
     Public nivelinteres As String
 End Class
-
 
 <DataContract()>
 Public Class CLlamadas
@@ -1733,6 +1739,7 @@ Public Class CCampaña
     <DataMember()>
     Public Observaciones As String
 End Class
+
 <DataContract()>
 Public Class CCampañaDetalles
     <DataMember()>
@@ -1771,6 +1778,8 @@ Public Class CClientesDetalles
     Public Empresa As String
     <DataMember()>
     Public campañaNombre As String
+    <DataMember()>
+    Public tipoCampana As String
     <DataMember()>
     Public NombreAsesor As String
     <DataMember()>

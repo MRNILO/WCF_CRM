@@ -883,6 +883,7 @@ Public Class Service1
             Aux.nivelinteres = DirectCast(reader.Item("nivelinteres"), String)
             Aux.Empresa = DirectCast(reader.Item("Empresa"), String)
             Aux.campañaNombre = DirectCast(reader.Item("campañaNombre"), String)
+            Aux.tipoCampana = DirectCast(reader.Item("TipoCampaña"), String)
             Aux.NombreAsesor = DirectCast(reader.Item("NombreAsesor"), String)
             Aux.ApellidoAsesor = DirectCast(reader.Item("ApellidoAsesor"), String)
             Aux.Observaciones = DirectCast(reader.Item("Observaciones"), String)
@@ -894,7 +895,6 @@ Public Class Service1
             Aux.fechaNacimiento = DirectCast(reader.Item("fechaNacimiento"), Date)
             Aux.id_etapaActual = DirectCast(reader.Item("id_etapaActual"), Integer)
             Aux.id_producto = DirectCast(reader.Item("id_producto"), Integer)
-            'ranking
             Aux.ranking = DirectCast(reader.Item("ranking"), String)
             Aux.Numcte = DirectCast(reader.Item("Numcte"), Integer)
 
@@ -6409,7 +6409,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Aux
     End Function
 #End Region
-
 #Region "Reportes"
     Public Function Obtener_CancelacionesEnkontrol(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of CancelacionesEnkontrol) Implements IService1.Obtener_CancelacionesEnkontrol
         Dim Query As String = "SELECT CL.numcte, CL.nom_cte + ' ' + CL.ap_paterno_cte + ' ' + CL.ap_materno_cte cliente, 
@@ -6890,7 +6889,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 #End Region
-
 #Region "Enkontrol"
     Public Function Obtener_OrigenAgente(ByVal Empleado As Integer) As List(Of OrigenAgente)
         Dim Query As String = "SELECT direccion_archivo
