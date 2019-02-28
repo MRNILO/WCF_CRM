@@ -2864,7 +2864,7 @@ Public Class Service1
 
         Dim cmd As New SqlCommand("Actualiza_supervisores", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.Parameters.AddWithValue("@Pid_usuario", id_usuario)
+        cmd.Parameters.AddWithValue("@Pid_supervisor", id_usuario)
         cmd.Parameters.AddWithValue("@Pnombre", nombre)
         cmd.Parameters.AddWithValue("@PapellidoPaterno", apellidoPaterno)
         cmd.Parameters.AddWithValue("@PapellidoMaterno", apellidoMaterno)
