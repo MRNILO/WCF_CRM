@@ -9,8 +9,8 @@ Public Class Service1
 
     Private ODBC_OBJ As New DirectConn
 
-    Dim ConexionStr As String = "Server=PCDESARROLLO\MTWDM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
-    'Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+    'Dim ConexionStr As String = "Server=PCDESARROLLO\MTWDM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+    Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
     'Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_edificasa;User Id=sa;Password=octy#1992.A;"
     ''Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_maximo;User Id=sa;Password=octy#1992.A;"
     Dim Conexion As New SqlConnection(ConexionStr)
@@ -1187,7 +1187,7 @@ Public Class Service1
 #Region "Citas"
     Function Insertar_CitaCallCenter(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String,
                                      ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date,
-                                     ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) Implements IService1.Insertar_CitaCallCenter
+                                     ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) As Boolean Implements IService1.Insertar_CitaCallCenter
 
         Dim cmd As New SqlCommand("Insertar_CitaCallCenter", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
