@@ -4,16 +4,13 @@ Imports System.Net.Mail
 Imports System.ServiceModel.Activation
 Imports SendGrid
 
-' NOTE: You can use the "Rename" command on the context menu to change the class name "Service1" in code, svc and config file together.
-' NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.vb at the Solution Explorer and start debugging.
-
-
 Public Class Service1
     Implements IService1
 
     Private ODBC_OBJ As New DirectConn
 
-    Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+    Dim ConexionStr As String = "Server=PCDESARROLLO\MTWDM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+    'Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
     'Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_edificasa;User Id=sa;Password=octy#1992.A;"
     ''Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_maximo;User Id=sa;Password=octy#1992.A;"
     Dim Conexion As New SqlConnection(ConexionStr)
@@ -1188,6 +1185,44 @@ Public Class Service1
     End Function
 #End Region
 #Region "Citas"
+    Function Insertar_CitaCallCenter(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String,
+                                     ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date,
+                                     ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) Implements IService1.Insertar_CitaCallCenter
+
+        Dim cmd As New SqlCommand("Insertar_CitaCallCenter", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cliente", id_cliente)
+        cmd.Parameters.AddWithValue("@pId_UsuarioCC", id_usuarioCC)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsesor", id_usuarioAsesor)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", Lugar_Contacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", ProyectoVisita)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicio)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
+        cmd.Parameters.AddWithValue("@pEstatus", Estatus)
+        cmd.Parameters.AddWithValue("@pId_Camapana", Id_Camapana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
+        cmd.Parameters.AddWithValue("@Activo", Activa)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
     Function Inserta_CitasCall(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String, ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Estatus As String) As Boolean Implements IService1.Inserta_CitasCall
 
         Dim cmd As New SqlCommand("Inserta_CitaCC", Conexion)
@@ -3007,7 +3042,6 @@ Public Class Service1
         Return Resultado
     End Function
 
-
     Function DiasSinTrabajarFiltro(ByVal id_supervisor As Integer, ByVal Filtro As String) As List(Of DiasSinTrabajar) Implements IService1.DiasSinTrabajarFiltro
         Dim Resultado As New List(Of DiasSinTrabajar)
         Dim cmd As New SqlCommand("DiasSinTrabajarFiltro", Conexion)
@@ -3170,7 +3204,6 @@ Public Class Service1
         Return Resultado
     End Function
     Function Inserta_supervisores(ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal email As String, ByVal usuario As String, ByVal contraseña As String, ByVal fechaCreacion As Date, ByVal fotografia As String) As Boolean Implements IService1.Inserta_supervisores
-
         Dim cmd As New SqlCommand("Inserta_supervisor", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@Pnombre", nombre)
@@ -3196,7 +3229,6 @@ Public Class Service1
         Return False
     End Function
     Function Elimina_supervisores(ByVal id_supervisor As Integer) As Boolean Implements IService1.Elimina_supervisores
-
         Dim cmd As New SqlCommand("Elimina_supervisores", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@Pid_supervisor", id_supervisor)
