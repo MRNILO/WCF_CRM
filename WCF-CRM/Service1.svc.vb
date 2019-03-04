@@ -1205,7 +1205,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@pEstatus", Estatus)
         cmd.Parameters.AddWithValue("@pId_Camapana", Id_Camapana)
         cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
-        cmd.Parameters.AddWithValue("@Activo", Activa)
+        cmd.Parameters.AddWithValue("@pActivo", Activa)
 
         Conexion.Close()
         Try
