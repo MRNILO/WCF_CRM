@@ -1253,6 +1253,57 @@ Public Class Service1
         Return False
     End Function
 
+    Function Verificar_VigenciaCita(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas) Implements IService1.Verificar_VigenciaCita
+        Dim cmd As SqlCommand
+        Dim DT As New DataTable
+
+        Dim Resultado As New List(Of VigenciaCitas)
+        Dim Aux As VigenciaCitas
+
+        Try
+            Conexion.Close()
+
+            Conexion.Open()
+            Dim DA As New SqlDataAdapter("SELECT id_cita, CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) AgenteCallCenter
+                                          FROM CitasCall CC
+                                          INNER JOIN usuarios US ON US.id_usuario = CC.id_usuarioCC
+                                          WHERE id_cliente = " & Id_Cliente & " AND Activa = 1", Conexion)
+            DA.Fill(DT)
+            Conexion.Close()
+
+            Aux = New VigenciaCitas
+            Aux.TotalCitas = DT.Rows.Count
+            Aux.CitasVigentes = DT.Rows.Count
+
+            If DT.Rows.Count = 0 Then
+                Aux.UsuarioVigente = "-"
+            Else
+                Aux.UsuarioVigente = DT.Rows(0).Item("AgenteCallCenter")
+            End If
+
+            For Each Row As DataRow In DT.Rows
+                cmd = New SqlCommand("Verificar_VigenciaCita", Conexion)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@pId_Cita", Row("id_cita"))
+
+                Conexion.Open()
+                If cmd.ExecuteNonQuery() > 0 Then Aux.CitasVigentes -= 1
+                Conexion.Close()
+            Next
+
+            Resultado.Add(Aux)
+        Catch ex As Exception
+            Conexion.Close()
+            Aux = New VigenciaCitas
+            Aux.TotalCitas = -1
+            Aux.CitasVigentes = -1
+
+            Resultado.Add(Aux)
+        End Try
+
+        Return Resultado
+    End Function
+
     Function Obtener_citasCliente(ByVal idCliente As Integer) As List(Of CCitasDetallesCliente) Implements IService1.Obtener_citasCliente
         Dim Resultado As New List(Of CCitasDetallesCliente)
         Dim cmd As New SqlCommand("Obtener_citasCliente", Conexion)
