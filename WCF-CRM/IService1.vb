@@ -1783,6 +1783,8 @@ Public Class CClientesDetalles
     <DataMember()>
     Public Empresa As String
     <DataMember()>
+    Public Id_Campaña As Integer
+    <DataMember()>
     Public campañaNombre As String
     <DataMember()>
     Public tipoCampana As String

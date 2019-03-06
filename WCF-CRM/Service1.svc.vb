@@ -879,6 +879,7 @@ Public Class Service1
             Aux.NombreCorto = DirectCast(reader.Item("NombreCorto"), String)
             Aux.nivelinteres = DirectCast(reader.Item("nivelinteres"), String)
             Aux.Empresa = DirectCast(reader.Item("Empresa"), String)
+            Aux.Id_Campaña = DirectCast(reader.Item("id_campaña"), Integer)
             Aux.campañaNombre = DirectCast(reader.Item("campañaNombre"), String)
             Aux.tipoCampana = DirectCast(reader.Item("TipoCampaña"), String)
             Aux.NombreAsesor = DirectCast(reader.Item("NombreAsesor"), String)
