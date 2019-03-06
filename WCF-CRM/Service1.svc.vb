@@ -1186,12 +1186,48 @@ Public Class Service1
     End Function
 #End Region
 #Region "Citas"
+    Function Insertar_Cita(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal IdTipoCampana As Integer,
+                           ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
+                           ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_Cita
+
+        Dim cmd As New SqlCommand("Insertar_Cita", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", IdTipoCampana)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicial)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pEstatus", Status)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
     Function Insertar_CitaCallCenter(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String,
                                      ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date,
                                      ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) As Boolean Implements IService1.Insertar_CitaCallCenter
 
         Dim cmd As New SqlCommand("Insertar_CitaCallCenter", Conexion)
-        cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@pId_Cliente", id_cliente)
         cmd.Parameters.AddWithValue("@pId_UsuarioCC", id_usuarioCC)
@@ -1333,6 +1369,7 @@ Public Class Service1
         Conexion.Close()
         Return Resultado
     End Function
+
     Function Obtener_observacionesCita(ByVal idCita As Integer) As CObservacionesCita Implements IService1.Obtener_observacionesCita
 
         Dim cmd As New SqlCommand("Obtener_observacionesCita", Conexion)
@@ -1351,6 +1388,7 @@ Public Class Service1
         Conexion.Close()
         Return Aux
     End Function
+
     Function ObservacionesCita(ByVal idCita As Integer, ByVal Observaciones As String, ByVal Realizada As Integer) As Boolean Implements IService1.ObservacionesCita
 
         Dim cmd As New SqlCommand("ObservacionesCita", Conexion)
@@ -1396,6 +1434,7 @@ Public Class Service1
         Return Resultado
 
     End Function
+
     Function CalificaCita(ByVal idCita As Integer, ByVal Calificacion As Integer) As Boolean Implements IService1.CalificaCita
         If VerificaSiYaSeCalificoCita(idCita) Then
         Else
@@ -1421,7 +1460,6 @@ Public Class Service1
     End Function
 
     Function Inserta_citas(ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal Fecha As Date, ByVal HoraProgramacion As String, ByVal Programada As String, ByVal AvisoCliente As String, ByVal AvisoUsuario As String, ByVal realizada As String, ByVal ObservacionUsuario As String, ByVal ObservacionCliente As String, ByVal HoraTermino As String, ByVal Lugar As String, ByVal ConfimacionCliente As String) As Integer Implements IService1.Inserta_citas
-
         Dim cmd As New SqlCommand("Inserta_Cita", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@Pid_cliente", id_cliente)
@@ -1450,6 +1488,7 @@ Public Class Service1
         Conexion.Close()
         Return Aux
     End Function
+
     Function Elimina_citas(ByVal id_cita As Integer) As Boolean Implements IService1.Elimina_citas
 
         Dim cmd As New SqlCommand("Elimina_citas", Conexion)
@@ -1469,6 +1508,7 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+
     Function Actualiza_citas(ByVal id_cita As Integer, ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal Fecha As Date, ByVal fechaCreacion As Date, ByVal HoraProgramacion As String, ByVal Programada As String, ByVal AvisoCliente As String, ByVal AvisoUsuario As String, ByVal realizada As String, ByVal ObservacionUsuario As String, ByVal ObservacionCliente As String, ByVal HoraTermino As String, ByVal Lugar As String, ByVal ConfimacionCliente As String) As Boolean Implements IService1.Actualiza_citas
 
         Dim cmd As New SqlCommand("Actualiza_citas", Conexion)
@@ -1502,6 +1542,7 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+
     Function Obtener_citas_id_usuario(ByVal id_usuario As Integer) As List(Of CCitas) Implements IService1.Obtener_citas_id_usuario
         Dim Resultado As New List(Of CCitas)
         Dim cmd As New SqlCommand("Obtener_citas_detalles_idCliente", Conexion)
@@ -1532,6 +1573,7 @@ Public Class Service1
         Conexion.Close()
         Return Resultado
     End Function
+
     Function Obtener_citas_detalles_idusuario(ByVal id_usuario As Integer) As List(Of CDetallesCitaUsuario) Implements IService1.Obtener_citas_detalles_idusuario
         Dim Resultado As New List(Of CDetallesCitaUsuario)
         Dim cmd As New SqlCommand("Obtener_citas_detalles_idusuario", Conexion)
@@ -1565,6 +1607,7 @@ Public Class Service1
         Conexion.Close()
         Return Resultado
     End Function
+
     Function Obtener_citas_detalles_idCliente(ByVal id_cliente As Integer) As List(Of CDetallesCitaUsuario) Implements IService1.Obtener_citas_detalles_idCliente
         Dim Resultado As New List(Of CDetallesCitaUsuario)
         Dim cmd As New SqlCommand("Obtener_citas_detalles_idCliente", Conexion)
