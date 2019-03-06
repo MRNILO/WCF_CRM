@@ -863,6 +863,7 @@ Public Class Service1
     Function Obtener_Clientes_detalles_idCliente(ByVal id_cliente As Integer) As List(Of CClientesDetalles) Implements IService1.Obtener_Clientes_detalles_idCliente
         Dim Resultado As New List(Of CClientesDetalles)
         Dim cmd As New SqlCommand("Obtener_Clientes_detalles_idCliente", Conexion)
+
         cmd.Parameters.AddWithValue("@idCliente", id_cliente)
         cmd.CommandType = CommandType.StoredProcedure
         Conexion.Close()
