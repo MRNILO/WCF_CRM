@@ -1188,7 +1188,7 @@ Public Class Service1
     End Function
 #End Region
 #Region "Citas"
-    Function Insertar_Cita(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal IdTipoCampana As Integer,
+    Function Insertar_Cita(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal TipoCampana As String,
                            ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
                            ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_Cita
 
@@ -1198,7 +1198,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
         cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
         cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
-        cmd.Parameters.AddWithValue("@pTipoCampana", IdTipoCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
         cmd.Parameters.AddWithValue("@pOrigen", Origen)
         cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
         cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
