@@ -1794,6 +1794,8 @@ Public Class CClientesDetalles
     <DataMember()>
     Public tipoCampana As String
     <DataMember()>
+    Public id_Usuario As Integer
+    <DataMember()>
     Public NombreAsesor As String
     <DataMember()>
     Public ApellidoAsesor As String
