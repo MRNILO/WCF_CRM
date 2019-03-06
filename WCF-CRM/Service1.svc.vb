@@ -3222,13 +3222,13 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
-    Function Cambia_usuarioClienteSupervisor(ByVal id_usuario As Integer, ByVal idCliente As Integer, ByVal idSupervsor As Integer) As Boolean Implements IService1.Cambia_usuarioClienteSupervisor
+    Function Cambia_usuarioClienteSupervisor(ByVal id_usuario As Integer, ByVal idCliente As Integer, ByVal idSupervisor As Integer) As Boolean Implements IService1.Cambia_usuarioClienteSupervisor
 
         Dim cmd As New SqlCommand("Cambia_usuarioClienteSupervisor", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@id_usuario", id_usuario)
         cmd.Parameters.AddWithValue("@idCliente", idCliente)
-        cmd.Parameters.AddWithValue("@idSupervisor", idSupervsor)
+        cmd.Parameters.AddWithValue("@idSupervisor", idSupervisor)
 
         Conexion.Close()
         Try
