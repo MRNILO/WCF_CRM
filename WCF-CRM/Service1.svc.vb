@@ -3222,6 +3222,29 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+    Function Cambia_usuarioClienteSupervisor(ByVal id_usuario As Integer, ByVal idCliente As Integer, ByVal idSupervsor As Integer) As Boolean Implements IService1.Cambia_usuarioClienteSupervisor
+
+        Dim cmd As New SqlCommand("Cambia_usuarioClienteSupervisor", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@id_usuario", id_usuario)
+        cmd.Parameters.AddWithValue("@idCliente", idCliente)
+        cmd.Parameters.AddWithValue("@idSupervisor", idSupervsor)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+        Conexion.Close()
+        Return False
+    End Function
+
     Function Obtener_AcumuladosSupervisor(ByVal id_supervisor As Integer, ByVal FechaInicio As Date, ByVal FechaFinal As Date) As List(Of CAcumuladosSupervisor) Implements IService1.Obtener_AcumuladosSupervisor
         Dim Resultado As New List(Of CAcumuladosSupervisor)
         Dim cmd As New SqlCommand("Obtener_AcumuladosSupervisor", Conexion)

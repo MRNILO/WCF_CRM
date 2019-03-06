@@ -283,6 +283,8 @@ Public Interface IService1
     <OperationContract()>
     Function Cambia_usuarioCliente(ByVal id_usuario As Integer, ByVal idCliente As Integer) As Boolean
     <OperationContract()>
+    Function Cambia_usuarioClienteSupervisor(ByVal id_usuario As Integer, ByVal idCliente As Integer, ByVal idSupervsor As Integer) As Boolean
+    <OperationContract()>
     Function Obtener_UsuarioDetalleSupervisor(ByVal id_supervisor As Integer) As List(Of CUsuariosDetalleSup)
     <OperationContract()>
     Function Obtener_DetalleSupervisor() As List(Of CDetalleSupervisor)
