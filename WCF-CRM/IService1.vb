@@ -118,6 +118,8 @@ Public Interface IService1
                                      ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date,
                                      ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) As Boolean
     <OperationContract()>
+    Function Insertar_ObservacionesCitas(ByVal IdCita As Integer, ByVal IdUsuario As Integer, ByVal Completada As Integer, ByVal Observaciones As String) As Boolean
+    <OperationContract()>
     Function Inserta_CitasCall(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String, ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Estatus As String) As Boolean
     <OperationContract()>
     Function Verificar_VigenciaCita(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas)

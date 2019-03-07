@@ -1262,6 +1262,31 @@ Public Class Service1
         Return False
     End Function
 
+    Function Insertar_ObservacionesCitas(ByVal IdCita As Integer, ByVal IdUsuario As Integer, ByVal Completada As Integer, ByVal Observaciones As String) As Boolean Implements IService1.Insertar_ObservacionesCitas
+        Dim cmd As New SqlCommand("Insertar_ObservacionesCitas", Conexion)
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cita", IdCita)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pCompletada", Completada)
+        cmd.Parameters.AddWithValue("@pObservaciones", Observaciones)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
     Function Inserta_CitasCall(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String, ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Estatus As String) As Boolean Implements IService1.Inserta_CitasCall
 
         Dim cmd As New SqlCommand("Inserta_CitaCC", Conexion)
