@@ -1225,26 +1225,137 @@ Public Class Service1
         Return False
     End Function
 
-    Function Insertar_CitaCallCenter(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String,
-                                     ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date,
-                                     ByVal Estatus As String, ByVal Id_Camapana As Integer, ByVal TipoCampana As String, ByVal Activa As Integer) As Boolean Implements IService1.Insertar_CitaCallCenter
+    Function Insertar_CitasCallCenter(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal TipoCampana As String,
+                           ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
+                           ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_CitasCallCenter
+
+        Dim cmd As New SqlCommand("Insertar_CitasCallCenter", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicial)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pEstatus", Status)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
+    Function Insertar_CitasProspectador(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal TipoCampana As String,
+                           ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
+                           ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_CitasProspectador
+
+        Dim cmd As New SqlCommand("Insertar_CitasProspectador", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicial)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pEstatus", Status)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
+    Function Insertar_CitasCaseta(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal TipoCampana As String,
+                           ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
+                           ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_CitasCaseta
+
+        Dim cmd As New SqlCommand("Insertar_CitasCaseta", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pId_Cliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicial)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pEstatus", Status)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+
+    Function Insertar_CitaCallCenter(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer, ByVal TipoCampana As String,
+                               ByVal Origen As String, ByVal LugarContacto As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal VigenciaInicial As Date,
+                               ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Ranking As String, ByVal Status As Integer) As Boolean Implements IService1.Insertar_CitaCallCenter
 
         Dim cmd As New SqlCommand("Insertar_CitaCallCenter", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.Parameters.AddWithValue("@pId_Cliente", id_cliente)
-        cmd.Parameters.AddWithValue("@pId_UsuarioCC", id_usuarioCC)
-        cmd.Parameters.AddWithValue("@pId_UsuarioAsesor", id_usuarioAsesor)
+        cmd.Parameters.AddWithValue("@pId_Cliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pId_Usuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pId_UsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pId_Camapana", IdCampana)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
         cmd.Parameters.AddWithValue("@pOrigen", Origen)
-        cmd.Parameters.AddWithValue("@pLugar_Contacto", Lugar_Contacto)
-        cmd.Parameters.AddWithValue("@pProyectoVisita", ProyectoVisita)
+        cmd.Parameters.AddWithValue("@pLugar_Contacto", LugarContacto)
+        cmd.Parameters.AddWithValue("@pProyectoVisita", Proyecto)
         cmd.Parameters.AddWithValue("@pModelo", Modelo)
-        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicio)
+        cmd.Parameters.AddWithValue("@pVigenciaInicio", VigenciaInicial)
         cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
         cmd.Parameters.AddWithValue("@pFechaCita", FechaCita)
-        cmd.Parameters.AddWithValue("@pEstatus", Estatus)
-        cmd.Parameters.AddWithValue("@pId_Camapana", Id_Camapana)
-        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
-        cmd.Parameters.AddWithValue("@pActivo", Activa)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pEstatus", Status)
 
         Conexion.Close()
         Try
