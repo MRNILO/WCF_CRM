@@ -135,6 +135,8 @@ Public Interface IService1
     <OperationContract()>
     Function Inserta_CitasCall(ByVal id_cliente As Integer, ByVal id_usuarioCC As Integer, ByVal id_usuarioAsesor As Integer, ByVal Origen As String, ByVal Lugar_Contacto As String, ByVal ProyectoVisita As String, ByVal Modelo As String, ByVal VigenciaInicio As Date, ByVal VigenciaFinal As Date, ByVal FechaCita As Date, ByVal Estatus As String) As Boolean
     <OperationContract()>
+    Function Verificar_VigenciaCitas(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas)
+    <OperationContract()>
     Function Verificar_VigenciaCita(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas)
     <OperationContract()>
     Function Inserta_citas(ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal Fecha As Date, ByVal HoraProgramacion As String, ByVal Programada As String, ByVal AvisoCliente As String, ByVal AvisoUsuario As String, ByVal realizada As String, ByVal ObservacionUsuario As String, ByVal ObservacionCliente As String, ByVal HoraTermino As String, ByVal Lugar As String, ByVal ConfimacionCliente As String) As Integer

@@ -1429,6 +1429,56 @@ Public Class Service1
         Return False
     End Function
 
+    Function Verificar_VigenciaCitas(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas) Implements IService1.Verificar_VigenciaCitas
+        Dim DTA As New DataTable
+        Dim DTB As New DataTable
+
+        Dim cmd As New SqlCommand
+        Dim Aux As VigenciaCitas
+        Dim Resultado As New List(Of VigenciaCitas)
+
+        Try
+            Conexion.Close()
+
+            Conexion.Open()
+            Dim DA As New SqlDataAdapter("SELECT Id_Cita FROM CitasClientes WHERE Id_Cliente = " & Id_Cliente, Conexion)
+            DA.Fill(DTA)
+
+            For Each Row As DataRow In DTA.Rows
+                cmd = New SqlCommand("Verificar_VigenciaCitas", Conexion)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@pId_Cita", Row("Id_Cita"))
+
+                cmd.ExecuteNonQuery()
+            Next
+
+            Dim DB As New SqlDataAdapter("SELECT Id_Cita, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado
+                                          FROM CitasClientes CC
+                                          INNER JOIN usuarios US ON US.id_usuario = CC.Id_Usuario
+                                          WHERE CC.Id_Cliente = " & Id_Cliente & " AND Status = 1", Conexion)
+            DB.Fill(DTB)
+            Conexion.Close()
+
+            Aux = New VigenciaCitas
+            Aux.TotalCitas = DTA.Rows.Count
+            Aux.CitasVigentes = DTB.Rows.Count
+            If DTB.Rows.Count = 0 Then Aux.UsuarioVigente = "-" Else Aux.UsuarioVigente = DTB.Rows(0).Item("AgenteAsignado")
+
+            Resultado.Add(Aux)
+        Catch ex As Exception
+            Conexion.Close()
+
+            Aux = New VigenciaCitas
+            Aux.TotalCitas = -1
+            Aux.CitasVigentes = -1
+            Aux.UsuarioVigente = "$ERR"
+
+            Resultado.Add(Aux)
+        End Try
+
+        Return Resultado
+    End Function
+
     Function Verificar_VigenciaCita(ByVal Id_Cliente As Integer) As List(Of VigenciaCitas) Implements IService1.Verificar_VigenciaCita
         Dim cmd As SqlCommand
         Dim DT As New DataTable
