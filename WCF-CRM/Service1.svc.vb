@@ -910,6 +910,18 @@ Public Class Service1
                 Aux.FechaEscritura = DirectCast(reader.Item("fecha_escritura"), Date)
             End If
 
+            If IsDBNull(reader.Item("fecha_cancelacion")) Then
+                Aux.FechaCancelacion = "1900-01-01"
+            Else
+                Aux.FechaCancelacion = DirectCast(reader.Item("fecha_cancelacion"), Date)
+            End If
+
+            If (String.IsNullOrEmpty(reader.Item("empresaEK").ToString)) Then
+                Aux.EmpresaEK = 0
+            Else
+                Aux.EmpresaEK = DirectCast(reader.Item("empresaEK"), Integer)
+            End If
+
             Resultado.Add(Aux)
         End While
         Conexion.Close()

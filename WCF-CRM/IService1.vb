@@ -1846,6 +1846,10 @@ Public Class CClientesDetalles
     Public FechaCierre As Date
     <DataMember()>
     Public FechaEscritura As Date
+    <DataMember()>
+    Public FechaCancelacion As Date
+    <DataMember()>
+    Public EmpresaEK As Integer
 End Class
 
 <DataContract()>
