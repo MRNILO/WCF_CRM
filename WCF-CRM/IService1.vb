@@ -2191,6 +2191,8 @@ Public Class VigenciaCitas
     <DataMember()>
     Public CitasVigentes As Integer
     <DataMember()>
+    Public Id_Usuario As Integer
+    <DataMember()>
     Public UsuarioVigente As String
 End Class
 #End Region

@@ -915,6 +915,7 @@ Public Class Service1
         Conexion.Close()
         Return Resultado
     End Function
+
     Function Obtener_Clientes_AsesorCallCenter(ByVal id_cliente As Integer) As List(Of AsesorCallCenter) Implements IService1.Obtener_Clientes_AsesorCallCenter
         Dim Resultado As New List(Of AsesorCallCenter)
         Dim cmd As New SqlCommand("Obtener_Clientes_AsesorCallCenter", Conexion)
@@ -1452,7 +1453,7 @@ Public Class Service1
                 cmd.ExecuteNonQuery()
             Next
 
-            Dim DB As New SqlDataAdapter("SELECT Id_Cita, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado
+            Dim DB As New SqlDataAdapter("SELECT Id_Cita, US.id_usuario, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado
                                           FROM CitasClientes CC
                                           INNER JOIN usuarios US ON US.id_usuario = CC.Id_Usuario
                                           WHERE CC.Id_Cliente = " & Id_Cliente & " AND Status = 1", Conexion)
@@ -1462,7 +1463,12 @@ Public Class Service1
             Aux = New VigenciaCitas
             Aux.TotalCitas = DTA.Rows.Count
             Aux.CitasVigentes = DTB.Rows.Count
-            If DTB.Rows.Count = 0 Then Aux.UsuarioVigente = "-" Else Aux.UsuarioVigente = DTB.Rows(0).Item("AgenteAsignado")
+            If DTB.Rows.Count = 0 Then
+                Aux.UsuarioVigente = "-"
+            Else
+                Aux.Id_Usuario = DTB.Rows(0).Item("id_usuario")
+                Aux.UsuarioVigente = DTB.Rows(0).Item("AgenteAsignado")
+            End If
 
             Resultado.Add(Aux)
         Catch ex As Exception
