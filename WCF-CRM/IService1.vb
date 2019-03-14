@@ -161,8 +161,8 @@ Public Interface IService1
 #End Region
 #Region "Visitas"
     <OperationContract()>
-    Function Insertar_VisitasClientes(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdTipoCredito As Integer, ByVal IdCampana As Integer,
-                                      ByVal IdImpedimento As Integer, ByVal Monto As Double, ByVal Ranking As String, ByVal Origen As String, ByVal Proyecto As String,
+    Function Insertar_VisitasClientes(ByVal IdCita As Integer, ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer,
+                                      ByVal IdImpedimento As Integer, ByVal TipoCredito As String, ByVal Monto As Double, ByVal Ranking As String, ByVal Origen As String, ByVal Proyecto As String,
                                       ByVal Modelo As String, ByVal TipoCampana As String, ByVal VigenciaIncial As Date, ByVal VigenciaFinal As Date, ByVal FechaVisita As Date,
                                       ByVal Status As Integer) As Boolean
 #End Region
