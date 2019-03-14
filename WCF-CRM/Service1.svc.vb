@@ -1849,6 +1849,47 @@ Public Class Service1
         Return Resultado
     End Function
 #End Region
+#Region "Visitas"
+    Function Insertar_VisitasClientes(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdTipoCredito As Integer, ByVal IdCampana As Integer,
+                                      ByVal IdImpedimento As Integer, ByVal Monto As Double, ByVal Ranking As String, ByVal Origen As String, ByVal Proyecto As String,
+                                      ByVal Modelo As String, ByVal TipoCampana As String, ByVal VigenciaIncial As Date, ByVal VigenciaFinal As Date, ByVal FechaVisita As Date,
+                                      ByVal Status As Integer) As Boolean Implements IService1.Insertar_VisitasClientes
+
+        Dim cmd As New SqlCommand("Insertar_VisitasClientes", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@pIdCliente", IdCliente)
+        cmd.Parameters.AddWithValue("@pIdUsuario", IdUsuario)
+        cmd.Parameters.AddWithValue("@pIdUsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pIdTipoCredito", IdTipoCredito)
+        cmd.Parameters.AddWithValue("@pIdCampana", IdCampana)
+        cmd.Parameters.AddWithValue("@pIdImpedimento", IdImpedimento)
+        cmd.Parameters.AddWithValue("@pMonto", Monto)
+        cmd.Parameters.AddWithValue("@pRanking", Ranking)
+        cmd.Parameters.AddWithValue("@pOrigen", Origen)
+        cmd.Parameters.AddWithValue("@pProyecto", Proyecto)
+        cmd.Parameters.AddWithValue("@pModelo", Modelo)
+        cmd.Parameters.AddWithValue("@pTipoCampana", TipoCampana)
+        cmd.Parameters.AddWithValue("@pVigenciaInicial", VigenciaIncial)
+        cmd.Parameters.AddWithValue("@pVigenciaFinal", VigenciaFinal)
+        cmd.Parameters.AddWithValue("@pFechaVisita", FechaVisita)
+        cmd.Parameters.AddWithValue("@pStatus", Status)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+
+        Conexion.Close()
+        Return False
+    End Function
+#End Region
 #Region "Configuraciones"
     Function Actualiza_configuraciones(ByVal id_configuracion As Integer, ByVal diasDeGracias As Integer, ByVal emailSistema As String, ByVal contraseñaEmail As String, ByVal smtpServer As String, ByVal puertoEmail As Integer, ByVal SSL As String, ByVal EnviarEmails As String) As Boolean Implements IService1.Actualiza_configuraciones
 

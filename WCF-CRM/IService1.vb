@@ -159,6 +159,13 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_citasCliente(ByVal idCLiente As Integer) As List(Of CCitasDetallesCliente)
 #End Region
+#Region "Visitas"
+    <OperationContract()>
+    Function Insertar_VisitasClientes(ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdTipoCredito As Integer, ByVal IdCampana As Integer,
+                                      ByVal IdImpedimento As Integer, ByVal Monto As Double, ByVal Ranking As String, ByVal Origen As String, ByVal Proyecto As String,
+                                      ByVal Modelo As String, ByVal TipoCampana As String, ByVal VigenciaIncial As Date, ByVal VigenciaFinal As Date, ByVal FechaVisita As Date,
+                                      ByVal Status As Integer) As Boolean
+#End Region
 #Region "Configuraciones"
     <OperationContract()>
     Function Actualiza_configuraciones(ByVal id_configuracion As Integer, ByVal diasDeGracias As Integer, ByVal emailSistema As String, ByVal contraseñaEmail As String, ByVal smtpServer As String, ByVal puertoEmail As Integer, ByVal SSL As String, ByVal EnviarEmails As String) As Boolean
