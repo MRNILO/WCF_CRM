@@ -439,7 +439,7 @@ Public Interface IService1
     <OperationContract()>
     Function Elimina_usuarios(ByVal id_usuario As Integer) As Boolean
     <OperationContract()>
-    Function Actualiza_usuarios(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal activo As Integer) As Boolean
+    Function Actualiza_usuarios(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer) As Boolean
     <OperationContract()>
     Function Obtener_usuarios_todos() As List(Of CUsuarios)
     <OperationContract()>
