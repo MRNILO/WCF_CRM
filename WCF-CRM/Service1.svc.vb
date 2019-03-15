@@ -1850,10 +1850,10 @@ Public Class Service1
     End Function
 #End Region
 #Region "Visitas"
-    Function Insertar_VisitasClientes(ByVal IdCita As Integer, ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdCampana As Integer,
-                                      ByVal IdImpedimento As Integer, ByVal TipoCredito As String, ByVal Monto As Double, ByVal Ranking As String, ByVal Origen As String, ByVal Proyecto As String,
-                                      ByVal Modelo As String, ByVal TipoCampana As String, ByVal VigenciaIncial As Date, ByVal VigenciaFinal As Date, ByVal FechaVisita As Date,
-                                      ByVal Status As Integer) As Boolean Implements IService1.Insertar_VisitasClientes
+    Function Insertar_VisitasClientes(ByVal IdCita As Integer, ByVal IdCliente As Integer, ByVal IdUsuario As Integer, ByVal IdUsuarioAsignado As Integer, ByVal IdUsuarioVisita As Integer,
+                                      ByVal IdCampana As Integer, ByVal IdImpedimento As Integer, ByVal TipoCredito As String, ByVal Monto As Double, ByVal Ranking As String,
+                                      ByVal Origen As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal TipoCampana As String, ByVal VigenciaIncial As Date,
+                                      ByVal VigenciaFinal As Date, ByVal FechaVisita As Date, ByVal Status As Integer) As Boolean Implements IService1.Insertar_VisitasClientes
 
         Dim cmd As New SqlCommand("Insertar_VisitasClientes", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
@@ -1861,6 +1861,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@pIdCliente", IdCliente)
         cmd.Parameters.AddWithValue("@pIdUsuario", IdUsuario)
         cmd.Parameters.AddWithValue("@pIdUsuarioAsignado", IdUsuarioAsignado)
+        cmd.Parameters.AddWithValue("@pIdUsuarioVisita", IdUsuarioVisita)
         cmd.Parameters.AddWithValue("@pIdCampana", IdCampana)
         cmd.Parameters.AddWithValue("@pIdImpedimento", IdImpedimento)
         cmd.Parameters.AddWithValue("@pTipoCredito", TipoCredito)
