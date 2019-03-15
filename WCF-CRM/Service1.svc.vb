@@ -4557,9 +4557,37 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
-    Function Actualiza_usuarios(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer) As Boolean Implements IService1.Actualiza_usuarios
+    Function Actualiza_usuarios(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal activo As Integer) As Boolean Implements IService1.Actualiza_usuarios
 
         Dim cmd As New SqlCommand("Actualiza_usuarios", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@Pid_usuario", id_usuario)
+        cmd.Parameters.AddWithValue("@Pnombre", nombre)
+        cmd.Parameters.AddWithValue("@PapellidoPaterno", apellidoPaterno)
+        cmd.Parameters.AddWithValue("@PapellidoMaterno", apellidoMaterno)
+        cmd.Parameters.AddWithValue("@PEmail", Email)
+        cmd.Parameters.AddWithValue("@activo", activo)
+        'cmd.Parameters.AddWithValue("@Pusuario", usuario)
+        'cmd.Parameters.AddWithValue("@Pcontraseña", contraseña)
+        'cmd.Parameters.AddWithValue("@PfechaCreacion", fechaCreacion)
+        'cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+        Conexion.Close()
+        Return False
+    End Function
+    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer) As Boolean Implements IService1.Actualiza_usuariosPass
+
+        Dim cmd As New SqlCommand("Actualiza_usuariosPass", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@Pid_usuario", id_usuario)
         cmd.Parameters.AddWithValue("@Pnombre", nombre)
@@ -4585,6 +4613,7 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+
     Function Obtener_usuarios_todos() As List(Of CUsuarios) Implements IService1.Obtener_usuarios_todos
         Dim Resultado As New List(Of CUsuarios)
         Dim cmd As New SqlCommand("Obtener_usuarios_todos", Conexion)
