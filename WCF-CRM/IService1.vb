@@ -984,6 +984,8 @@ Public Class CUsuariosDetalleSup
     Public fechaCreacion As Date
     <DataMember()>
     Public activo As Integer
+    <DataMember()>
+    Public id_TipoUsuario As Integer
 End Class
 
 <DataContract()>
