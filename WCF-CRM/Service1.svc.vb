@@ -4586,7 +4586,7 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
-    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer) As Boolean Implements IService1.Actualiza_usuariosPass
+    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer, ByVal TipoUsuario As Integer) As Boolean Implements IService1.Actualiza_usuariosPass
 
         Dim cmd As New SqlCommand("Actualiza_usuariosPass", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
@@ -4598,7 +4598,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@activo", activo)
         cmd.Parameters.AddWithValue("@Pusuario", usuario)
         cmd.Parameters.AddWithValue("@Pcontraseña", contraseña)
-        'cmd.Parameters.AddWithValue("@PfechaCreacion", fechaCreacion)
+        cmd.Parameters.AddWithValue("@PTipoUsuario", TipoUsuario)
         'cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
         Conexion.Close()
         Try
