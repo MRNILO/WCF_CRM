@@ -3542,6 +3542,7 @@ Public Class Service1
             Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
             Aux.activo = reader.Item("activo")
             Aux.id_TipoUsuario = DirectCast(reader.Item("id_tipoUsuario"), Integer)
+            Aux.TipousuarioDes = DirectCast(reader.Item("TipoUsuario"), String)
             Resultado.Add(Aux)
         End While
         Conexion.Close()

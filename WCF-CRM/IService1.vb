@@ -986,6 +986,8 @@ Public Class CUsuariosDetalleSup
     Public activo As Integer
     <DataMember()>
     Public id_TipoUsuario As Integer
+    <DataMember()>
+    Public TipousuarioDes As String
 End Class
 
 <DataContract()>
