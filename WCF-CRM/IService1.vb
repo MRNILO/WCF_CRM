@@ -2209,5 +2209,7 @@ Public Class VigenciaCitas
     Public Id_Usuario As Integer
     <DataMember()>
     Public UsuarioVigente As String
+    <DataMember()>
+    Public TipoUsuario As String
 End Class
 #End Region

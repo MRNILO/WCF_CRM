@@ -1465,9 +1465,11 @@ Public Class Service1
                 cmd.ExecuteNonQuery()
             Next
 
-            Dim DB As New SqlDataAdapter("SELECT Id_Cita, US.id_usuario, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado
+            Dim DB As New SqlDataAdapter("SELECT Id_Cita, US.id_usuario, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado,
+                                                 UPPER(TU.TipoUsuario)
                                           FROM CitasClientes CC
                                           INNER JOIN usuarios US ON US.id_usuario = CC.Id_Usuario
+                                          INNER JOIN TipoUsuarios TU ON TU.id_tipoUsuario = US.id_tipoUsuario
                                           WHERE CC.Id_Cliente = " & Id_Cliente & " AND Status = 1", Conexion)
             DB.Fill(DTB)
             Conexion.Close()
@@ -1480,6 +1482,7 @@ Public Class Service1
             Else
                 Aux.Id_Usuario = DTB.Rows(0).Item("id_usuario")
                 Aux.UsuarioVigente = DTB.Rows(0).Item("AgenteAsignado")
+                Aux.TipoUsuario = DTB.Rows(0).Item("TipoUsuario")
             End If
 
             Resultado.Add(Aux)
@@ -1490,6 +1493,7 @@ Public Class Service1
             Aux.TotalCitas = -1
             Aux.CitasVigentes = -1
             Aux.UsuarioVigente = "$ERR"
+            Aux.TipoUsuario = "$ERR"
 
             Resultado.Add(Aux)
         End Try
