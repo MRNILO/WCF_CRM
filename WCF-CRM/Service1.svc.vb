@@ -1466,7 +1466,7 @@ Public Class Service1
             Next
 
             Dim DB As New SqlDataAdapter("SELECT Id_Cita, US.id_usuario, CONCAT(US.nombre, ' ', US.apellidoPaterno, ' ', US.apellidoMaterno) AgenteAsignado,
-                                                 UPPER(TU.TipoUsuario)
+                                                 UPPER(TU.TipoUsuario) TipoUsuario
                                           FROM CitasClientes CC
                                           INNER JOIN usuarios US ON US.id_usuario = CC.Id_Usuario
                                           INNER JOIN TipoUsuarios TU ON TU.id_tipoUsuario = US.id_tipoUsuario
