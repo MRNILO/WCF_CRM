@@ -40,6 +40,8 @@ Public Interface IService1
     Function Actualiza_rankingCliente(ByVal id_cliente As Integer, ByVal ranking As String) As Boolean
     <OperationContract>
     Function Actualizar_Ranking(ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal ranking_org As String, ByVal ranking_nvo As String) As Boolean
+    <OperationContract>
+    Function Actualizar_Ranking_Visitas(ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal ranking_org As String, ByVal ranking_nvo As String, ByVal id_Visita As Integer, ByVal id_Impedimento As Integer) As Boolean
     <OperationContract()>
     Function ValidaEmail(ByVal Email As String) As Boolean
     <OperationContract()>

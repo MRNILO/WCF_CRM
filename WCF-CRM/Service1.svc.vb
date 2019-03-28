@@ -745,6 +745,31 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+    Function Actualizar_Ranking_Visitas(ByVal id_cliente As Integer, ByVal id_usuario As Integer, ByVal ranking_org As String, ByVal ranking_nvo As String, ByVal id_Visita As Integer, ByVal id_Impedimento As Integer) As Boolean Implements IService1.Actualizar_Ranking_Visitas
+        Dim cmd As New SqlCommand("Actualizar_Ranking_Visitas", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@idCliente", id_cliente)
+        cmd.Parameters.AddWithValue("@idUsuario", id_usuario)
+        cmd.Parameters.AddWithValue("@rankingOrg", ranking_org)
+        cmd.Parameters.AddWithValue("@rankingNvo", ranking_nvo)
+        cmd.Parameters.AddWithValue("@id_Visita", id_Visita)
+        cmd.Parameters.AddWithValue("@id_Impedimento", id_Impedimento)
+
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+        Conexion.Close()
+        Return False
+    End Function
+
     Function Obtener_clientes_Todos() As List(Of CClientes) Implements IService1.Obtener_clientes_Todos
         Dim Resultado As New List(Of CClientes)
         Dim cmd As New SqlCommand("Obtener_clientes_Todos", Conexion)
