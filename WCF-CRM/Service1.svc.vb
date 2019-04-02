@@ -1119,8 +1119,8 @@ Public Class Service1
             Aux.campañaNombre = DirectCast(reader.Item("campañaNombre"), String)
             Aux.tipoCampaña = DirectCast(reader.Item("TipoCampaña"), String)
             Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
-            'Aux.fechaInicio = DirectCast(reader.Item("fechaInicio"), Date)
-            'Aux.fechaFinal = DirectCast(reader.Item("fechaFinal"), Date)
+            Aux.fechaInicio = DirectCast(reader.Item("FechaInic"), Date)
+            Aux.fechaFinal = DirectCast(reader.Item("FechaFin"), Date)
             Aux.Observaciones = DirectCast(reader.Item("Observaciones"), String)
             Resultado.Add(Aux)
         End While
