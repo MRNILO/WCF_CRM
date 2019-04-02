@@ -1015,12 +1015,13 @@ Public Class Service1
         Conexion.Close()
         Return Resultado
     End Function
-    Function Inserta_campañas(ByVal campañaNombre As String, ByVal id_tipoCampaña As Integer, ByVal fechaInicio As Date, ByVal fechaFinal As Date, ByVal Observaciones As String) As Boolean Implements IService1.Inserta_campañas
+    Function Inserta_campañas(ByVal campañaNombre As String, ByVal id_tipoCampaña As Integer, ByVal id_MedioCampaña As Integer, ByVal fechaInicio As Date, ByVal fechaFinal As Date, ByVal Observaciones As String) As Boolean Implements IService1.Inserta_campañas
 
         Dim cmd As New SqlCommand("Inserta_Campaña", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@PcampañaNombre", campañaNombre)
         cmd.Parameters.AddWithValue("@Pid_tipoCampaña", id_tipoCampaña)
+        cmd.Parameters.AddWithValue("@Pid_MedioCampaña", id_MedioCampaña)
         cmd.Parameters.AddWithValue("@PfechaInicio", fechaInicio)
         cmd.Parameters.AddWithValue("@PfechaFinal", fechaFinal)
         cmd.Parameters.AddWithValue("@PObservaciones", Observaciones)

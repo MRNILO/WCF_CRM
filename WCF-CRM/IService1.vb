@@ -87,7 +87,7 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_combo_campañas() As List(Of CComboCampañas)
     <OperationContract()>
-    Function Inserta_campañas(ByVal campañaNombre As String, ByVal id_tipoCampaña As Integer, ByVal fechaInicio As Date, ByVal fechaFinal As Date, ByVal Observaciones As String) As Boolean
+    Function Inserta_campañas(ByVal campañaNombre As String, ByVal id_tipoCampaña As Integer, ByVal id_MedioCampaña As Integer, ByVal fechaInicio As Date, ByVal fechaFinal As Date, ByVal Observaciones As String) As Boolean
     <OperationContract()>
     Function Elimina_campañas(ByVal id_campaña As Integer) As Boolean
     <OperationContract()>
