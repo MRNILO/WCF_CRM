@@ -921,6 +921,7 @@ Public Class Service1
             Aux.id_producto = DirectCast(reader.Item("id_producto"), Integer)
             Aux.ranking = DirectCast(reader.Item("ranking"), String)
             Aux.Numcte = DirectCast(reader.Item("Numcte"), Integer)
+            Aux.Numcte2 = DirectCast(reader.Item("Numcte2"), Integer)
             Aux.id_Usuario = DirectCast(reader.Item("IdUsuario"), Integer)
 
             If IsDBNull(reader.Item("fecha_cierre")) Then
@@ -945,6 +946,12 @@ Public Class Service1
                 Aux.EmpresaEK = 0
             Else
                 Aux.EmpresaEK = DirectCast(reader.Item("empresaEK"), Integer)
+            End If
+
+            If IsDBNull(reader.Item("Fecha_Recuperacion")) Then
+                Aux.FechaCierre = "1900-01-01"
+            Else
+                Aux.Fecha_Recuperacion = DirectCast(reader.Item("Fecha_Recuperacion"), Date)
             End If
 
             Resultado.Add(Aux)

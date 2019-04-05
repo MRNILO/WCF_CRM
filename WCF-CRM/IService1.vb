@@ -1858,11 +1858,15 @@ Public Class CClientesDetalles
     <DataMember()>
     Public Numcte As Integer
     <DataMember()>
+    Public Numcte2 As Integer
+    <DataMember()>
     Public FechaCierre As Date
     <DataMember()>
     Public FechaEscritura As Date
     <DataMember()>
     Public FechaCancelacion As Date
+    <DataMember()>
+    Public Fecha_Recuperacion As Date
     <DataMember()>
     Public EmpresaEK As Integer
 End Class
