@@ -1868,6 +1868,10 @@ Public Class CClientesDetalles
     <DataMember()>
     Public Fecha_Recuperacion As Date
     <DataMember()>
+    Public ModeloEk As String
+    <DataMember()>
+    Public Fecha_OperacionEK As Date
+    <DataMember()>
     Public EmpresaEK As Integer
 End Class
 

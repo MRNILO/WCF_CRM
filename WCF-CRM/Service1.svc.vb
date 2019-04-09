@@ -923,6 +923,7 @@ Public Class Service1
             Aux.Numcte = DirectCast(reader.Item("Numcte"), Integer)
             Aux.Numcte2 = DirectCast(reader.Item("Numcte2"), Integer)
             Aux.id_Usuario = DirectCast(reader.Item("IdUsuario"), Integer)
+            Aux.ModeloEk = DirectCast(reader.Item("ModeloEk"), String)
 
             If IsDBNull(reader.Item("fecha_cierre")) Then
                 Aux.FechaCierre = "1900-01-01"
@@ -949,10 +950,17 @@ Public Class Service1
             End If
 
             If IsDBNull(reader.Item("Fecha_Recuperacion")) Then
-                Aux.FechaCierre = "1900-01-01"
+                Aux.Fecha_Recuperacion = "1900-01-01"
             Else
                 Aux.Fecha_Recuperacion = DirectCast(reader.Item("Fecha_Recuperacion"), Date)
             End If
+
+            If IsDBNull(reader.Item("FechaOperacionEk")) Then
+                Aux.Fecha_OperacionEK = "1900-01-01"
+            Else
+                Aux.Fecha_OperacionEK = DirectCast(reader.Item("FechaOperacionEk"), Date)
+            End If
+
 
             Resultado.Add(Aux)
         End While
