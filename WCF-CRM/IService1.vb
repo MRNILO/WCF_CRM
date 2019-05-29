@@ -437,7 +437,7 @@ Public Interface IService1
 #End Region
 #Region "Usuarios"
     <OperationContract()>
-    Function Inserta_usuarios(ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal TipoUsuario As Integer, ByVal fotografia As String) As Integer
+    Function Inserta_usuarios(ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal TipoUsuario As Integer, ByVal fotografia As String, ByVal Usuario_Coordinador As Integer, ByVal Coordinador As String) As Integer
     <OperationContract()>
     Function Elimina_usuarios(ByVal id_usuario As Integer) As Boolean
     <OperationContract()>

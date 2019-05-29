@@ -4556,7 +4556,7 @@ Public Class Service1
     End Function
 #End Region
 #Region "Usuarios"
-    Function Inserta_usuarios(ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal TipoUsuario As Integer, ByVal fotografia As String) As Integer Implements IService1.Inserta_usuarios
+    Function Inserta_usuarios(ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal TipoUsuario As Integer, ByVal fotografia As String, ByVal Usuario_Coordinador As Integer, ByVal Coordinador As String) As Integer Implements IService1.Inserta_usuarios
         Dim cmd As New SqlCommand("Inserta_usuario", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
         cmd.Parameters.AddWithValue("@Pnombre", nombre)
@@ -4567,6 +4567,8 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@Pcontraseña", contraseña)
         cmd.Parameters.AddWithValue("@TipoUsuario", TipoUsuario)
         cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
+        cmd.Parameters.AddWithValue("@PUsuario_Coordinador", fotografia)
+        cmd.Parameters.AddWithValue("@Coordinador", fotografia)
 
         Conexion.Close()
         Conexion.Open()
