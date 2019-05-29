@@ -554,6 +554,11 @@ Public Interface IService1
 #Region "Usuarios"
     <OperationContract()>
     Function Obtener_TipoUsuario() As List(Of TipoUsuario)
+
+    <OperationContract()>
+    Function Actualizar_Coordinador(ByVal NumEmpleado As Integer, ByVal NumCordinador As Integer, ByVal Nombre_Cordinador As String) As Boolean
+
+
 #End Region
 
     <OperationContract()>

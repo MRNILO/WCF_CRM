@@ -3707,6 +3707,27 @@ Public Class Service1
 
         Return Resultado
     End Function
+
+    Public Function Actualizar_Coordinador(ByVal NumEmpleado As Integer, ByVal NumCordinador As Integer, ByVal Nombre_Cordinador As String) As Boolean Implements IService1.Actualizar_Coordinador
+        Dim cmd As New SqlCommand("Actualiza_Coordinador", Conexion)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@PNumEmpleado", NumEmpleado)
+        cmd.Parameters.AddWithValue("@PNumCordinador", NumCordinador)
+        cmd.Parameters.AddWithValue("@PNombre_Cordinador", Nombre_Cordinador)
+        Conexion.Close()
+        Try
+            Conexion.Open()
+            If cmd.ExecuteNonQuery() > 0 Then
+                Conexion.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Conexion.Close()
+            Return False
+        End Try
+        Conexion.Close()
+        Return False
+    End Function
 #End Region
 #Region "Oportunidades"
     Function Obtener_oportunidades() As List(Of COportunidades) Implements IService1.Obtener_oportunidades
