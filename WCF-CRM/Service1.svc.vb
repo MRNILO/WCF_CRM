@@ -3584,6 +3584,8 @@ Public Class Service1
             Aux.activo = reader.Item("activo")
             Aux.id_TipoUsuario = DirectCast(reader.Item("id_tipoUsuario"), Integer)
             Aux.TipousuarioDes = DirectCast(reader.Item("TipoUsuario"), String)
+            Aux.id_supervisor = If(IsDBNull(reader("id_supervisor")), 0, Convert.ToInt32(reader("id_supervisor")))
+            Aux.SupervisorDes = DirectCast(reader.Item("SupervisorDes"), String)
             Resultado.Add(Aux)
         End While
         Conexion.Close()
@@ -3673,14 +3675,7 @@ Public Class Service1
         While reader.Read
             Aux = New CSupervisores
             Aux.id_supervisor = DirectCast(reader.Item("id_supervisor"), Integer)
-            Aux.nombre = DirectCast(reader.Item("nombre"), String)
-            Aux.apellidoPaterno = DirectCast(reader.Item("apellidoPaterno"), String)
-            Aux.apellidoMaterno = DirectCast(reader.Item("apellidoMaterno"), String)
-            Aux.email = DirectCast(reader.Item("email"), String)
-            Aux.usuario = DirectCast(reader.Item("usuario"), String)
-            Aux.contraseña = DirectCast(reader.Item("contraseña"), String)
-            Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
-            Aux.fotografia = DirectCast(reader.Item("fotografia"), String)
+            Aux.NombreCompleto = DirectCast(reader.Item("supervisor"), String)
             Resultado.Add(Aux)
         End While
         Conexion.Close()
@@ -4655,7 +4650,8 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
-    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer, ByVal TipoUsuario As Integer) As Boolean Implements IService1.Actualiza_usuariosPass
+    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String,
+                                    ByVal activo As Integer, ByVal TipoUsuario As Integer, ByVal id_Supervisor As Integer) As Boolean Implements IService1.Actualiza_usuariosPass
 
         Dim cmd As New SqlCommand("Actualiza_usuariosPass", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
@@ -4668,6 +4664,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@Pusuario", usuario)
         cmd.Parameters.AddWithValue("@Pcontraseña", contraseña)
         cmd.Parameters.AddWithValue("@PTipoUsuario", TipoUsuario)
+        cmd.Parameters.AddWithValue("@PIdSupervisor", id_Supervisor)
         'cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
         Conexion.Close()
         Try

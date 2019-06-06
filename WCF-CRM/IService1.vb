@@ -443,7 +443,7 @@ Public Interface IService1
     <OperationContract()>
     Function Actualiza_usuarios(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal activo As Integer) As Boolean
     <OperationContract()>
-    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer, ByVal TipoUsuario As Integer) As Boolean
+    Function Actualiza_usuariosPass(ByVal id_usuario As Integer, ByVal nombre As String, ByVal apellidoPaterno As String, ByVal apellidoMaterno As String, ByVal Email As String, ByVal usuario As String, ByVal contraseña As String, ByVal activo As Integer, ByVal TipoUsuario As Integer, ByVal id_Supervisor As Integer) As Boolean
     <OperationContract()>
     Function Obtener_usuarios_todos() As List(Of CUsuarios)
     <OperationContract()>
@@ -995,6 +995,10 @@ Public Class CUsuariosDetalleSup
     Public id_TipoUsuario As Integer
     <DataMember()>
     Public TipousuarioDes As String
+    <DataMember()>
+    Public id_supervisor As Integer
+    <DataMember()>
+    Public SupervisorDes As String
 End Class
 
 <DataContract()>
@@ -1424,6 +1428,8 @@ Public Class CSupervisores
     Public fechaCreacion As Date
     <DataMember()>
     Public fotografia As String
+    <DataMember()>
+    Public NombreCompleto As String
 End Class
 
 <DataContract()>
