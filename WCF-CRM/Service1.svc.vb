@@ -4583,8 +4583,8 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@Pcontraseña", contraseña)
         cmd.Parameters.AddWithValue("@TipoUsuario", TipoUsuario)
         cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
-        cmd.Parameters.AddWithValue("@PUsuario_Coordinador", fotografia)
-        cmd.Parameters.AddWithValue("@Coordinador", fotografia)
+        cmd.Parameters.AddWithValue("@PUsuario_Coordinador", Usuario_Coordinador)
+        cmd.Parameters.AddWithValue("@PCoordinador", Coordinador)
 
         Conexion.Close()
         Conexion.Open()
