@@ -4700,6 +4700,7 @@ Public Class Service1
             Aux.contraseña = DirectCast(reader.Item("contraseña"), String)
             Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
             Aux.fotografia = DirectCast(reader.Item("fotografia"), String)
+            Aux.BorraEk = reader.Item("BorraEK")
             Resultado.Add(Aux)
         End While
         Conexion.Close()

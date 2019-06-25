@@ -1283,6 +1283,8 @@ Public Class CUsuarios
     Public fotografia As String = "-"
     <DataMember()>
     Public Nivel As Integer = 0
+    <DataMember()>
+    Public BorraEk As Integer
 End Class
 
 <DataContract()>
