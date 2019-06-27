@@ -286,6 +286,7 @@ Public Class Service1
             Aux.fotografia = DirectCast(reader.Item("fotografia"), String)
             Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
             Aux.Nivel = DirectCast(reader.Item("Nivel"), Integer)
+            Aux.BorraEk = Convert.ToUInt32(reader.Item("BorraEk").ToString)
         End While
         Conexion.Close()
         Return Aux
@@ -3612,6 +3613,7 @@ Public Class Service1
             Aux.contraseña = DirectCast(Reader.Item("contraseña"), String)
             Aux.fechaCreacion = DirectCast(Reader.Item("fechaCreacion"), Date)
             Aux.activo = Reader.Item("activo")
+            Aux.BorraEK = Reader.Item("BorraEk")
 
             Resultado.Add(Aux)
         End While
@@ -4700,7 +4702,6 @@ Public Class Service1
             Aux.contraseña = DirectCast(reader.Item("contraseña"), String)
             Aux.fechaCreacion = DirectCast(reader.Item("fechaCreacion"), Date)
             Aux.fotografia = DirectCast(reader.Item("fotografia"), String)
-            Aux.BorraEk = reader.Item("BorraEK")
             Resultado.Add(Aux)
         End While
         Conexion.Close()

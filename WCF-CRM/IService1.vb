@@ -1021,6 +1021,8 @@ Public Class CDetalleSupervisor
     Public fechaCreacion As Date
     <DataMember()>
     Public activo As Integer
+    <DataMember()>
+    Public BorraEK As Integer
 End Class
 
 <DataContract()>
