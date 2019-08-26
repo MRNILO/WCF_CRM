@@ -557,10 +557,13 @@ Public Interface IService1
 
     <OperationContract()>
     Function Actualizar_Coordinador(ByVal NumEmpleado As Integer, ByVal NumCordinador As Integer, ByVal Nombre_Cordinador As String) As Boolean
-
-
 #End Region
 
+#Region "Comisiones"
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Prospectador(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+
+#End Region
     <OperationContract()>
     Function Obtener_notificaciones(ByVal idCliente As Integer) As List(Of CNotifica)
     ' TODO: Add your service operations here
@@ -2242,5 +2245,19 @@ Public Class VigenciaCitas
     Public UsuarioVigente As String
     <DataMember()>
     Public TipoUsuario As String
+End Class
+#End Region
+
+#Region "Comisiones"
+<DataContract()>
+Public Class IndicadoresProspeccion
+    <DataMember()>
+    Public Empleado As String
+    <DataMember()>
+    Public Nombre_Completo_Empleado As String
+    <DataMember()>
+    Public NumVisitas As Integer
+    <DataMember()>
+    Public NumSeparaciones As Integer
 End Class
 #End Region

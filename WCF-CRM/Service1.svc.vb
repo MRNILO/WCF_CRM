@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Net.Mail
 Imports System.ServiceModel.Activation
+Imports Newtonsoft.Json
 Imports SendGrid
 
 Public Class Service1
@@ -7405,9 +7406,35 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         End If
 
         DS.Clear() : DS.Dispose()
+    End Function
+#End Region
+#Region "Comisiones"
+    Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
+        Try
+            Dim Resultado As New List(Of IndicadoresProspeccion)
+            Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+            cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As IndicadoresProspeccion
+            While reader.Read
+                Aux = New IndicadoresProspeccion
+                Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
+                Aux.NumVisitas = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Resultado.Add(Aux)
+            End While
+            Conexion.Close()
 
+            Return JsonConvert.SerializeObject(Resultado)
 
-
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
     End Function
 #End Region
 End Class
