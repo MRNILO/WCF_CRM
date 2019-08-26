@@ -1150,6 +1150,10 @@ Public Class CidCliente
     <DataMember()>
     Public CURP As String
     <DataMember()>
+    Public RFC As String
+    <DataMember()>
+    Public EdoCivil As String
+    <DataMember()>
     Public fechaNacimiento As Date
 End Class
 
