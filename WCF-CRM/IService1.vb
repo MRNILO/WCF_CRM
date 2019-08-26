@@ -561,7 +561,7 @@ Public Interface IService1
 
 #Region "Comisiones"
     <OperationContract()>
-    Function Obtener_IndicadoresComisiones_Prospectador(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
 
 #End Region
     <OperationContract()>

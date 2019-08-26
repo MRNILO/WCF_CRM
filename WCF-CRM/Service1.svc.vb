@@ -7409,13 +7409,14 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Comisiones"
-    Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
+    Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
         Try
             Dim Resultado As New List(Of IndicadoresProspeccion)
             Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion", Conexion)
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
             cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
             Conexion.Close()
             Conexion.Open()
             Dim reader As SqlDataReader = cmd.ExecuteReader
