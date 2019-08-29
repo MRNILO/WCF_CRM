@@ -7425,8 +7425,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux = New IndicadoresProspeccion
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
-                Aux.NumSeparaciones = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
-                Aux.NumVisitas = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
                 Resultado.Add(Aux)
             End While
             Conexion.Close()
