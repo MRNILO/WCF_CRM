@@ -2258,6 +2258,14 @@ Public Class IndicadoresProspeccion
     <DataMember()>
     Public NumVisitas As Integer
     <DataMember()>
+    Public Property MontoNumVisitas As Double
+    <DataMember()>
     Public NumSeparaciones As Integer
+    <DataMember()>
+    Public Property MontoSeparaciones As Double
+    <DataMember()>
+    Public ModeloVisitas As String
+    <DataMember()>
+    Public ProyectoVisitas As String
 End Class
 #End Region
