@@ -57,9 +57,9 @@ Public Interface IService1
     <OperationContract()>
     Function Elimina_clientes(ByVal id_cliente As Integer) As Boolean
     <OperationContract()>
-    Function Actualiza_clientes(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal) As Boolean
+    Function Actualiza_clientes(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal Id_Usr As Integer) As Boolean
     <OperationContract>
-    Function Actualiza_clientes_callcenter(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal NSS As String, ByVal FechaNacimiento As Date) As Boolean
+    Function Actualiza_clientes_callcenter(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal NSS As String, ByVal FechaNacimiento As Date, ByVal Id_Cte As Integer) As Boolean
     <OperationContract()>
     Function Obtener_ClienteObservaciones(ByVal idCliente As Integer) As List(Of CClienteObservaciones)
     <OperationContract()>

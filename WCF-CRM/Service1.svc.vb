@@ -614,7 +614,7 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
-    Function Actualiza_clientes(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal) As Boolean Implements IService1.Actualiza_clientes
+    Function Actualiza_clientes(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String, ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String, ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal Id_Usr As Integer) As Boolean Implements IService1.Actualiza_clientes
 
         Dim cmd As New SqlCommand("Actualiza_clientes", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
@@ -634,6 +634,8 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@Pfotografia", fotografia)
         cmd.Parameters.AddWithValue("@PfotoTpresentacion", fotoTpresentacion)
         cmd.Parameters.AddWithValue("@PMonto", Monto)
+        cmd.Parameters.AddWithValue("@Id_Usr", Id_Usr)
+
         Conexion.Close()
         Try
             Conexion.Open()
@@ -650,7 +652,7 @@ Public Class Service1
     End Function
     Function Actualiza_clientes_callcenter(ByVal id_cliente As Integer, ByVal Nombre As String, ByVal ApellidoPaterno As String, ByVal ApellidoMaterno As String, ByVal Email As String,
                                            ByVal id_producto As Integer, ByVal id_nivel As Integer, ByVal id_empresa As Integer, ByVal id_campaña As Integer, ByVal Observaciones As String,
-                                           ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal NSS As String, ByVal FechaNacimiento As Date) As Boolean Implements IService1.Actualiza_clientes_callcenter
+                                           ByVal fotografia As String, ByVal fotoTpresentacion As String, ByVal Monto As Decimal, ByVal NSS As String, ByVal FechaNacimiento As Date, ByVal Id_Usr As Integer) As Boolean Implements IService1.Actualiza_clientes_callcenter
 
         Dim cmd As New SqlCommand("Actualiza_clientes_callcenter", Conexion)
         cmd.CommandType = CommandType.StoredProcedure
@@ -669,6 +671,7 @@ Public Class Service1
         cmd.Parameters.AddWithValue("@PMonto", Monto)
         cmd.Parameters.AddWithValue("@PNSS", NSS)
         cmd.Parameters.AddWithValue("@PFechaNacimiento", FechaNacimiento)
+        cmd.Parameters.AddWithValue("@Id_Usr", Id_Usr)
 
         Try
             Conexion.Open()
