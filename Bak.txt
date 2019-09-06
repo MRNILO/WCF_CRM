@@ -1,0 +1,8 @@
+Dim ConexionStr As String = "Server=PCDESARROLLO\MTWDM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
+Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_edificasa;User Id=sa;Password=octy#1992.A;"
+Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_maximo;User Id=sa;Password=octy#1992.A;"
+
+  <!--<add name="crm_roest3ConnectionString" connectionString="Data Source=PCDESARROLLO\MTWDM;Initial Catalog=crm_edificasa;Persist Security Info=True;User ID=sa;Password=Sistemas1245" providerName="System.Data.SqlClient" />-->
+    <!--<add name="crm_roest3ConnectionString" connectionString="Data Source=PCDESARROLLO01\DESAJORGE;Initial Catalog=crm_edificasa;Persist Security Info=True;User ID=sa;Password=DesaJorge" providerName="System.Data.SqlClient" />-->
+    <add name="RutaXLS" connectionString="C:\GPV\" />

@@ -8,13 +8,10 @@ Imports SendGrid
 Public Class Service1
     Implements IService1
 
-    Private ODBC_OBJ As New DirectConn
-
-    'Dim ConexionStr As String = "Server=PCDESARROLLO\MTWDM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
-    Dim ConexionStr As String = "Server=192.168.1.13\CRM;Database=crm_edificasa;User Id=sa;Password=Sistemas1245;"
-    'Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_edificasa;User Id=sa;Password=octy#1992.A;"
-    ''Dim ConexionStr As String = "Server=altaircloud.mx\MSSQLSERVER,5696;Database=crm_maximo;User Id=sa;Password=octy#1992.A;"
+    Dim ConexionStr As String = ConfigurationManager.ConnectionStrings("Conexion_SQL").ConnectionString()
     Dim Conexion As New SqlConnection(ConexionStr)
+
+    Private ODBC_OBJ As New DirectConn
 
 #Region "Error login"
     Function Obtener_nombre_metodo() As String
@@ -45,6 +42,7 @@ Public Class Service1
         Return False
     End Function
 #End Region
+
     Public Sub New()
     End Sub
 
