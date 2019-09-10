@@ -2273,5 +2273,7 @@ Public Class Indicadores
     Public ProyectoSeparacion As String
     <DataMember()>
     Public ModeloSeparacion As String
+    <DataMember()>
+    Public Status_Agente As Integer
 End Class
 #End Region
