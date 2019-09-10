@@ -7412,7 +7412,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 #Region "Comisiones"
     Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
         Try
-            Dim Resultado As New List(Of IndicadoresProspeccion)
+            Dim Resultado As New List(Of Indicadores)
             Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion", Conexion)
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
@@ -7421,9 +7421,9 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Conexion.Close()
             Conexion.Open()
             Dim reader As SqlDataReader = cmd.ExecuteReader
-            Dim Aux As IndicadoresProspeccion
+            Dim Aux As Indicadores
             While reader.Read
-                Aux = New IndicadoresProspeccion
+                Aux = New Indicadores
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
@@ -7439,5 +7439,66 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Throw New FaultException(ex.Message)
         End Try
     End Function
+
+    Public Function Obtener_IndicadoresComisiones_Cerradores(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Cerradores
+        Try
+            Dim Resultado As New List(Of Indicadores)
+            Dim cmd As New SqlCommand("Obtener_IndicadoresCerradores", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+            cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As Indicadores
+            While reader.Read
+                Aux = New Indicadores
+                Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.ProyectoSeparacion = reader.Item("abrev_fracc")
+                Aux.ModeloSeparacion = reader.Item("id_producto")
+                Resultado.Add(Aux)
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Resultado)
+
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+    Public Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Moviles
+        Try
+            Dim Resultado As New List(Of Indicadores)
+            Dim cmd As New SqlCommand("Obtener_IndicadoresMoviles", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+            cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As Indicadores
+            While reader.Read
+                Aux = New Indicadores
+                Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.ProyectoSeparacion = reader.Item("abrev_fracc")
+                Aux.ModeloSeparacion = reader.Item("id_producto")
+                Resultado.Add(Aux)
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Resultado)
+
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+
+
 #End Region
 End Class

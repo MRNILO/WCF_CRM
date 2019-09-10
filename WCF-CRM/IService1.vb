@@ -562,12 +562,14 @@ Public Interface IService1
 #Region "Comisiones"
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
-
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Cerradores(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
 #End Region
     <OperationContract()>
     Function Obtener_notificaciones(ByVal idCliente As Integer) As List(Of CNotifica)
     ' TODO: Add your service operations here
-
 End Interface
 
 ' Use a data contract as illustrated in the sample below to add composite types to service operations. <DataContract()>
@@ -2250,7 +2252,7 @@ End Class
 
 #Region "Comisiones"
 <DataContract()>
-Public Class IndicadoresProspeccion
+Public Class Indicadores
     <DataMember()>
     Public Empleado As String
     <DataMember()>
@@ -2267,5 +2269,9 @@ Public Class IndicadoresProspeccion
     Public ModeloVisitas As String
     <DataMember()>
     Public ProyectoVisitas As String
+    <DataMember()>
+    Public ProyectoSeparacion As String
+    <DataMember()>
+    Public ModeloSeparacion As String
 End Class
 #End Region
