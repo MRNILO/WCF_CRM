@@ -557,6 +557,9 @@ Public Interface IService1
 
     <OperationContract()>
     Function Actualizar_Coordinador(ByVal NumEmpleado As Integer, ByVal NumCordinador As Integer, ByVal Nombre_Cordinador As String) As Boolean
+
+    <OperationContract()>
+    Function ObtenerAgentes_CallCenter(ByVal Tipo As Integer) As String
 #End Region
 
 #Region "Comisiones"

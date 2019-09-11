@@ -4603,6 +4603,28 @@ Public Class Service1
 
         Return Aux
     End Function
+    Public Function ObtenerAgentes_CallCenter(ByVal TipoUsuario As Integer) As String Implements IService1.ObtenerAgentes_CallCenter
+        Try
+            Dim cmd As New SqlCommand("Obtener_usuarios_Tipo", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@PTipo", TipoUsuario)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As String = ""
+
+            While reader.Read
+                Aux = Aux & "'" & reader.Item("usuario") & "',"
+            End While
+            Conexion.Close()
+
+            Aux = Aux.Substring(0, Aux.Length - 1)
+
+            Return Aux
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
 
     Function Inserta_Supervisor()
 
