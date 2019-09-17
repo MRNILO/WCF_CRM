@@ -2275,6 +2275,8 @@ Public Class Indicadores
     <DataMember()>
     Public ProyectoVisitas As String
     <DataMember()>
+    Public CCVisitas As String
+    <DataMember()>
     Public ProyectoSeparacion As String
     <DataMember()>
     Public ModeloSeparacion As String
