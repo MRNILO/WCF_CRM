@@ -566,6 +566,8 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
     <OperationContract()>
+    Function Obtener_IndicadoresComisiones_CallCenter(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    <OperationContract()>
     Function Obtener_IndicadoresComisiones_Cerradores(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
