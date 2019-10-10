@@ -2263,24 +2263,30 @@ Public Class Indicadores
     <DataMember()>
     Public Nombre_Completo_Empleado As String
     <DataMember()>
+    Public Nombre_Cliente As String
+    <DataMember()>
+    Public apPaterno_Cliente As String
+    <DataMember()>
+    Public apMaterno_Cliente As String
+    <DataMember()>
     Public NumVisitas As Integer
     <DataMember()>
-    Public Property MontoNumVisitas As Double
+    Public MontoNumVisitas As Double
     <DataMember()>
     Public NumSeparaciones As Integer
     <DataMember()>
-    Public Property MontoSeparaciones As Double
+    Public MontoSeparaciones As Double
     <DataMember()>
-    Public ModeloVisitas As String
+    Public Modelo As String
     <DataMember()>
-    Public ProyectoVisitas As String
+    Public Proyecto As String
     <DataMember()>
-    Public CCVisitas As String
+    Public NombreCorto As String
     <DataMember()>
-    Public ProyectoSeparacion As String
-    <DataMember()>
-    Public ModeloSeparacion As String
+    Public CC As String
     <DataMember()>
     Public Status_Agente As Integer
+    <DataMember()>
+    Public cliente As String
 End Class
 #End Region

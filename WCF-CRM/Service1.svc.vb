@@ -7448,12 +7448,17 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             While reader.Read
                 Aux = New Indicadores
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Nombre_Cliente = reader.Item("nombre_cliente")
+                Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
+                Aux.apMaterno_Cliente = reader.Item("ap_Materno_cliente")
+                Aux.cliente = reader.Item("cliente")
                 Aux.Empleado = reader.Item("usuario")
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
                 Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
-                Aux.ModeloVisitas = reader.Item("Modelo")
-                Aux.ProyectoVisitas = reader.Item("ProyectoVisitas")
-                Aux.CCVisitas = If(String.IsNullOrEmpty(reader.Item("CCVisitas").ToString), "", reader.Item("CCVisitas"))
+                Aux.Modelo = reader.Item("Modelo")
+                Aux.Proyecto = reader.Item("Proyecto")
+                Aux.NombreCorto = reader.Item("NombreCorto")
+                Aux.CC = If(String.IsNullOrEmpty(reader.Item("CC").ToString), "", reader.Item("CC"))
                 Aux.Status_Agente = reader.Item("Status_Agente")
                 Resultado.Add(Aux)
                 int = int + 1
@@ -7482,11 +7487,14 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             While reader.Read
                 Aux = New Indicadores
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Nombre_Cliente = reader.Item("nombre_cliente")
+                Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
+                Aux.apMaterno_Cliente = reader.Item("ap_Materno_cliente")
                 Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
                 Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
-                Aux.ProyectoVisitas = reader.Item("abrev_fracc")
-                Aux.ModeloVisitas = reader.Item("id_producto")
+                Aux.Proyecto = reader.Item("abrev_fracc")
+                Aux.Modelo = reader.Item("id_producto")
                 Aux.Status_Agente = reader.Item("Status_Agente")
                 Resultado.Add(Aux)
             End While
@@ -7516,8 +7524,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
-                Aux.ProyectoSeparacion = reader.Item("abrev_fracc")
-                Aux.ModeloSeparacion = reader.Item("id_producto")
+                Aux.Proyecto = reader.Item("abrev_fracc")
+                Aux.Modelo = reader.Item("id_producto")
                 Aux.Status_Agente = reader.Item("Status_Agente")
                 Resultado.Add(Aux)
             End While
@@ -7546,8 +7554,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Empleado = Convert.ToInt32(reader.Item("usuario"))
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
-                Aux.ProyectoSeparacion = reader.Item("abrev_fracc")
-                Aux.ModeloSeparacion = reader.Item("id_producto")
+                Aux.Proyecto = reader.Item("abrev_fracc")
+                Aux.Modelo = reader.Item("id_producto")
                 Aux.Status_Agente = reader.Item("Status_Agente")
                 Resultado.Add(Aux)
             End While
@@ -7559,7 +7567,5 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Throw New FaultException(ex.Message)
         End Try
     End Function
-
-
 #End Region
 End Class
