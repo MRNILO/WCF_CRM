@@ -559,17 +559,24 @@ Public Interface IService1
 
     <OperationContract()>
     Function Actualizar_Coordinador(ByVal NumEmpleado As Integer, ByVal NumCordinador As Integer, ByVal Nombre_Cordinador As String) As Boolean
+
+    <OperationContract()>
+    Function ObtenerAgentes_CallCenter(ByVal Tipo As Integer) As String
 #End Region
 
 #Region "Comisiones"
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
-
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_CallCenter(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Cerradores(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
 #End Region
     <OperationContract()>
     Function Obtener_notificaciones(ByVal idCliente As Integer) As List(Of CNotifica)
     ' TODO: Add your service operations here
-
 End Interface
 
 ' Use a data contract as illustrated in the sample below to add composite types to service operations. <DataContract()>
@@ -2252,22 +2259,36 @@ End Class
 
 #Region "Comisiones"
 <DataContract()>
-Public Class IndicadoresProspeccion
+Public Class Indicadores
     <DataMember()>
     Public Empleado As String
     <DataMember()>
     Public Nombre_Completo_Empleado As String
     <DataMember()>
+    Public Nombre_Cliente As String
+    <DataMember()>
+    Public apPaterno_Cliente As String
+    <DataMember()>
+    Public apMaterno_Cliente As String
+    <DataMember()>
     Public NumVisitas As Integer
     <DataMember()>
-    Public Property MontoNumVisitas As Double
+    Public MontoNumVisitas As Double
     <DataMember()>
     Public NumSeparaciones As Integer
     <DataMember()>
-    Public Property MontoSeparaciones As Double
+    Public MontoSeparaciones As Double
     <DataMember()>
-    Public ModeloVisitas As String
+    Public Modelo As String
     <DataMember()>
-    Public ProyectoVisitas As String
+    Public Proyecto As String
+    <DataMember()>
+    Public NombreCorto As String
+    <DataMember()>
+    Public CC As String
+    <DataMember()>
+    Public Status_Agente As Integer
+    <DataMember()>
+    Public cliente As String
 End Class
 #End Region
