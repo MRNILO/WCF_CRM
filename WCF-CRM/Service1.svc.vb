@@ -6910,6 +6910,28 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Reportes"
+    Public Function Obtener_VisitasAyBXFraccionamiento(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date, ByVal Proyecto As String) As Integer Implements IService1.Obtener_VisitasAyBXFraccionamiento
+        Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB", Conexion)
+        With Cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha_Inicio", Fecha_Inicio)
+            .Parameters.AddWithValue("@Fecha_Fin", Fecha_Final)
+            .Parameters.AddWithValue("@Proyecto", Proyecto)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+
+        Dim TotalVisita As Integer = 0
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        While Reader.Read
+            TotalVisita = Reader.Item("Total")
+        End While
+        Conexion.Close()
+
+        Return TotalVisita
+    End Function
+
     Public Function Obtener_CancelacionesEnkontrol(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of CancelacionesEnkontrol) Implements IService1.Obtener_CancelacionesEnkontrol
         Dim Query As String = "SELECT CL.numcte, CL.nom_cte + ' ' + CL.ap_paterno_cte + ' ' + CL.ap_materno_cte cliente, 
                                       AG.empleado, AG.nom_empleado + ' ' + AG.ap_paterno_empleado + ' ' + AG.ap_materno_empleado agente,

@@ -547,6 +547,8 @@ Public Interface IService1
 
     <OperationContract()>
     Function Obtener_Proyectos() As List(Of Proyectos)
+    <OperationContract()>
+    Function Obtener_VisitasAyBXFraccionamiento(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date, ByVal Proyecto As String) As Integer
 #End Region
 #Region "Enkontrol"
 
