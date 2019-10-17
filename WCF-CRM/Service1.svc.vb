@@ -7469,6 +7469,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Dim int = 1
             While reader.Read
                 Aux = New Indicadores
+                Aux.Empresa = reader.Item("empresa")
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Nombre_Cliente = reader.Item("nombre_cliente")
                 Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")

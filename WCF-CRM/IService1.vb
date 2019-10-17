@@ -2261,6 +2261,8 @@ End Class
 <DataContract()>
 Public Class Indicadores
     <DataMember()>
+    Public Empresa As String
+    <DataMember()>
     Public Empleado As String
     <DataMember()>
     Public Nombre_Completo_Empleado As String
