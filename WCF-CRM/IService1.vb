@@ -513,6 +513,12 @@ Public Interface IService1
 #End Region
 #Region "Reportes"
     <OperationContract()>
+    Function Obtener_MediosCampanas() As List(Of MediosCampana)
+
+    <OperationContract()>
+    Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio)
+
+    <OperationContract()>
     Function Obtener_CancelacionesEnkontrol(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of CancelacionesEnkontrol)
 
     <OperationContract()>
@@ -834,6 +840,7 @@ Public Class CNotifica
     <DataMember()>
     Public URL As String
 End Class
+
 Public Class CTareasPorAvisar
     Public id_tarea As Integer
     Public prioridad As String
@@ -843,6 +850,7 @@ Public Class CTareasPorAvisar
     Public HoraProgramada As TimeSpan
     Public Email As String
 End Class
+
 Public Class CCitasPendientes
     Public id_cita As Integer
     Public id_cliente As Integer
@@ -869,6 +877,7 @@ Public Class CCitasPendientes
     Public Telefono As String
     Public Principal As Integer
 End Class
+
 Public Class CLlamadasPAvisar
     Public Nombre As String
     Public ApellidoPaterno As String
@@ -1984,6 +1993,22 @@ End Class
 #End Region
 
 #Region "Reportes"
+<DataContract()>
+Public Class MediosCampana
+    <DataMember()>
+    Public MedioId As String
+    <DataMember()>
+    Public NombreMedio As String
+End Class
+
+<DataContract()>
+Public Class VisitasMedio
+    <DataMember()>
+    Public Id_Visita As Integer
+    <DataMember()>
+    Public Id_Cliente As Integer
+End Class
+
 <DataContract()>
 Public Class ReporteCalidad
     <DataMember()>

@@ -6932,6 +6932,58 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Reportes"
+    Public Function Obtener_MediosCampanas() As List(Of MediosCampana) Implements IService1.Obtener_MediosCampanas
+        Dim Aux As MediosCampana
+        Dim Lst As New List(Of MediosCampana)
+
+        Dim Cmd As New SqlCommand("EXEC spRepObtener_MediosCampanas")
+
+        Conexion.Close()
+        Conexion.Open()
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        While Reader.Read
+            Aux = New MediosCampana
+            With Aux
+                .MedioId = Reader.Item("Id_Medio")
+                .NombreMedio = Reader.Item("Nombre_Medio")
+            End With
+
+            Lst.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return Lst
+    End Function
+
+    Public Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio) Implements IService1.Obtener_VisitasAyBMedio
+        Dim Aux As VisitasMedio
+        Dim Lst As New List(Of VisitasMedio)
+
+        Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyBMedio", Conexion)
+        With Cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha_Inicio", FechaInicio)
+            .Parameters.AddWithValue("@Fecha_Fin", FechaFin)
+            .Parameters.AddWithValue("@Medio", Medio)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        While Reader.Read
+            Aux = New VisitasMedio
+            With Aux
+                .Id_Visita = Reader.Item("Id_Visita")
+                .Id_Cliente = Reader.Item("Id_Cliente")
+            End With
+
+            Lst.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return Lst
+    End Function
+
     Public Function Obtener_VisitasAyBXFraccionamiento(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date, ByVal Proyecto As String) As Integer Implements IService1.Obtener_VisitasAyBXFraccionamiento
         Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB", Conexion)
         With Cmd
