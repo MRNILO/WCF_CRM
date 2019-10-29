@@ -6936,7 +6936,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Dim Aux As MediosCampana
         Dim Lst As New List(Of MediosCampana)
 
-        Dim Cmd As New SqlCommand("EXEC spRepObtener_MediosCampanas")
+        Dim Cmd As New SqlCommand("EXEC spRepObtener_MediosCampanas", Conexion)
 
         Conexion.Close()
         Conexion.Open()
@@ -6945,7 +6945,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Aux = New MediosCampana
             With Aux
                 .MedioId = Reader.Item("Id_Medio")
-                .NombreMedio = Reader.Item("Nombre_Medio")
+                .NombreMedio = Reader.Item("NombreMedio")
             End With
 
             Lst.Add(Aux)
@@ -6974,7 +6974,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Aux = New VisitasMedio
             With Aux
                 .Id_Visita = Reader.Item("Id_Visita")
-                .Id_Cliente = Reader.Item("Id_Cliente")
+                .Id_Medio = Reader.Item("Id_Medio")
+                .Numcte = Reader.Item("Numcte")
             End With
 
             Lst.Add(Aux)

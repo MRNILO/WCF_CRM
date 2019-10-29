@@ -2006,7 +2006,9 @@ Public Class VisitasMedio
     <DataMember()>
     Public Id_Visita As Integer
     <DataMember()>
-    Public Id_Cliente As Integer
+    Public Id_Medio As Integer
+    <DataMember()>
+    Public Numcte As Integer
 End Class
 
 <DataContract()>
