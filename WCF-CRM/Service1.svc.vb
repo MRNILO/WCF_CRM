@@ -7536,6 +7536,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux.NombreCorto = reader.Item("NombreCorto")
                 Aux.CC = If(String.IsNullOrEmpty(reader.Item("CC").ToString), "", reader.Item("CC"))
                 Aux.Status_Agente = reader.Item("Status_Agente")
+                Aux.fecha_escritura = DirectCast(reader.Item("fecha_escritura"), Date)
                 Resultado.Add(Aux)
                 int = int + 1
             End While

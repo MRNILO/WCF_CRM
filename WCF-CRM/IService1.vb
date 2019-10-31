@@ -2318,6 +2318,8 @@ Public Class Indicadores
     <DataMember()>
     Public Status_Agente As Integer
     <DataMember()>
+    Public fecha_escritura As Date
+    <DataMember()>
     Public cliente As String
 End Class
 #End Region
