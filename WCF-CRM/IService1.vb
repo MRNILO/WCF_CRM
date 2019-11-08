@@ -2321,5 +2321,7 @@ Public Class Indicadores
     Public fecha_escritura As Date
     <DataMember()>
     Public cliente As String
+    <DataMember()>
+    Public clienteEK As String
 End Class
 #End Region

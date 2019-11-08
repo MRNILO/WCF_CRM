@@ -7528,6 +7528,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
                 Aux.apMaterno_Cliente = reader.Item("ap_Materno_cliente")
                 Aux.cliente = reader.Item("cliente")
+                Aux.clienteEK = reader.Item("Numcte")
                 Aux.Empleado = reader.Item("usuario")
                 Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
                 Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
@@ -7536,7 +7537,11 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
                 Aux.NombreCorto = reader.Item("NombreCorto")
                 Aux.CC = If(String.IsNullOrEmpty(reader.Item("CC").ToString), "", reader.Item("CC"))
                 Aux.Status_Agente = reader.Item("Status_Agente")
-                Aux.fecha_escritura = DirectCast(reader.Item("fecha_escritura"), Date)
+                If IsDBNull(reader.Item("fecha_escritura")) Then
+                    Aux.fecha_escritura = "1900-01-01"
+                Else
+                    Aux.fecha_escritura = DirectCast(reader.Item("fecha_escritura"), Date)
+                End If
                 Resultado.Add(Aux)
                 int = int + 1
             End While
