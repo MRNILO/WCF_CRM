@@ -516,6 +516,9 @@ Public Interface IService1
     Function Obtener_MediosCampanas() As List(Of MediosCampana)
 
     <OperationContract()>
+    Function Obtener_VisitasByProyectoModeloSemana(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+
+    <OperationContract()>
     Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio)
 
     <OperationContract()>
@@ -553,12 +556,15 @@ Public Interface IService1
 
     <OperationContract()>
     Function Obtener_Proyectos() As List(Of Proyectos)
+
     <OperationContract()>
     Function Obtener_VisitasAyBXFraccionamiento(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date, ByVal Proyecto As String) As Integer
 #End Region
+
 #Region "Enkontrol"
 
 #End Region
+
 #Region "Usuarios"
     <OperationContract()>
     Function Obtener_TipoUsuario() As List(Of TipoUsuario)
@@ -580,6 +586,7 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
 #End Region
+
     <OperationContract()>
     Function Obtener_notificaciones(ByVal idCliente As Integer) As List(Of CNotifica)
     ' TODO: Add your service operations here
@@ -2009,6 +2016,18 @@ Public Class VisitasMedio
     Public Id_Medio As Integer
     <DataMember()>
     Public Numcte As Integer
+End Class
+
+<DataContract()>
+Public Class VisitasProyModSem
+    <DataMember()>
+    Public Proyecto As String
+    <DataMember()>
+    Public Modelo As String
+    <DataMember()>
+    Public Visitas As Integer
+    <DataMember()>
+    Public Semana As Integer
 End Class
 
 <DataContract()>

@@ -6955,6 +6955,40 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Lst
     End Function
 
+    Public Function Obtener_VisitasByProyectoModeloSemana(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_VisitasByProyectoModeloSemana
+        Try
+            Dim Aux As VisitasProyModSem
+            Dim Lst As New List(Of VisitasProyModSem)
+
+            Dim Cmd As New SqlCommand("spRepObtener_VisitasByProyectoModeloSemana", Conexion)
+            With Cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.AddWithValue("@Fecha_Inicio", FechaInicio)
+                .Parameters.AddWithValue("@Fecha_Fin", FechaFin)
+            End With
+
+            Conexion.Close()
+            Conexion.Open()
+            Dim Reader As SqlDataReader = Cmd.ExecuteReader
+            While Reader.Read
+                Aux = New VisitasProyModSem
+                With Aux
+                    .Proyecto = Reader.Item("Proyecto")
+                    .Modelo = Reader.Item("Modelo")
+                    .Visitas = Reader.Item("Visitas")
+                    .Semana = Reader.Item("Semana")
+                End With
+
+                Lst.Add(Aux)
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Lst)
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+
     Public Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio) Implements IService1.Obtener_VisitasAyBMedio
         Dim Aux As VisitasMedio
         Dim Lst As New List(Of VisitasMedio)
@@ -7486,6 +7520,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 #End Region
+
 #Region "Enkontrol"
     Public Function Obtener_OrigenAgente(ByVal Empleado As Integer) As List(Of OrigenAgente)
         Dim Query As String = "SELECT direccion_archivo
@@ -7506,6 +7541,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         DS.Clear() : DS.Dispose()
     End Function
 #End Region
+
 #Region "Comisiones"
     Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
         Try
@@ -7577,7 +7613,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Conexion.Close()
 
             Return JsonConvert.SerializeObject(Resultado)
-
         Catch ex As Exception
             Throw New FaultException(ex.Message)
         End Try
@@ -7613,6 +7648,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Throw New FaultException(ex.Message)
         End Try
     End Function
+
     Public Function Obtener_IndicadoresComisiones_Moviles(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Moviles
         Try
             Dim Resultado As New List(Of Indicadores)
