@@ -6989,6 +6989,40 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         End Try
     End Function
 
+    Public Function Obtener_VisitasByProyectoMedioSemana(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_VisitasByProyectoMedioSemana
+        Try
+            Dim Aux As VisitasProyMedSem
+            Dim Lst As New List(Of VisitasProyMedSem)
+
+            Dim Cmd As New SqlCommand("spRepObtener_VisitasByProyectoMedioSemana", Conexion)
+            With Cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.AddWithValue("@Fecha_Inicio", FechaInicio)
+                .Parameters.AddWithValue("@Fecha_Fin", FechaFin)
+            End With
+
+            Conexion.Close()
+            Conexion.Open()
+            Dim Reader As SqlDataReader = Cmd.ExecuteReader
+            While Reader.Read
+                Aux = New VisitasProyMedSem
+                With Aux
+                    .Proyecto = Reader.Item("Proyecto")
+                    .Medio = Reader.Item("Medio")
+                    .Visitas = Reader.Item("Visitas")
+                    .Semana = Reader.Item("Semana")
+                End With
+
+                Lst.Add(Aux)
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Lst)
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+
     Public Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio) Implements IService1.Obtener_VisitasAyBMedio
         Dim Aux As VisitasMedio
         Dim Lst As New List(Of VisitasMedio)

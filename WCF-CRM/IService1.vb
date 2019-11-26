@@ -519,6 +519,9 @@ Public Interface IService1
     Function Obtener_VisitasByProyectoModeloSemana(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
 
     <OperationContract()>
+    Function Obtener_VisitasByProyectoMedioSemana(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+
+    <OperationContract()>
     Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio)
 
     <OperationContract()>
@@ -2026,6 +2029,18 @@ Public Class VisitasProyModSem
     Public Proyecto As String
     <DataMember()>
     Public Modelo As String
+    <DataMember()>
+    Public Visitas As Integer
+    <DataMember()>
+    Public Semana As Integer
+End Class
+
+<DataContract()>
+Public Class VisitasProyMedSem
+    <DataMember()>
+    Public Proyecto As String
+    <DataMember()>
+    Public Medio As String
     <DataMember()>
     Public Visitas As Integer
     <DataMember()>
