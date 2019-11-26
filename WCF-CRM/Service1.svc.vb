@@ -7553,12 +7553,11 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Resultado
     End Function
-    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
+    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
         Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB_Modelo", Conexion)
         Dim Lst As New List(Of VisitasProyModSem)
         With Cmd
             .CommandType = CommandType.StoredProcedure
-            .Parameters.AddWithValue("@Fecha_Inicio", Fecha_Inicio)
             .Parameters.AddWithValue("@Fecha_Fin", Fecha_Final)
         End With
 

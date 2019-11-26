@@ -564,7 +564,7 @@ Public Interface IService1
     Function Obtener_VisitasAyBXFraccionamiento(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date, ByVal Proyecto As String) As Integer
 
     <OperationContract()>
-    Function Obtener_VisitasAyBXModelo(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of VisitasProyModSem)
+    Function Obtener_VisitasAyBXModelo(ByVal FechaFin As Date) As List(Of VisitasProyModSem)
 #End Region
 
 #Region "Enkontrol"
