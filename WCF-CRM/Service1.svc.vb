@@ -7519,6 +7519,36 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Resultado
     End Function
+    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
+        Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB_Modelo", Conexion)
+        Dim Lst As New List(Of VisitasProyModSem)
+        With Cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha_Inicio", Fecha_Inicio)
+            .Parameters.AddWithValue("@Fecha_Fin", Fecha_Final)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+
+        Dim TotalVisita As Integer = 0
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        Dim Aux As VisitasProyModSem
+
+        While Reader.Read
+            Aux = New VisitasProyModSem
+            Aux.Proyecto = DirectCast(Reader.Item("Proyecto"), String)
+            Aux.Modelo = DirectCast(Reader.Item("Modelo"), String)
+            Aux.Ano = DirectCast(Reader.Item("Año"), Integer)
+            Aux.Semana = DirectCast(Reader.Item("Semana"), Integer)
+            Aux.Visitas = DirectCast(Reader.Item("Total"), Integer)
+            Lst.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return Lst
+    End Function
+
 #End Region
 
 #Region "Enkontrol"
