@@ -7553,7 +7553,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Resultado
     End Function
-    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
+    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Final As Date) As String Implements IService1.Obtener_VisitasAyBXModelo
         Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB_Modelo", Conexion)
         Dim Lst As New List(Of VisitasProyModSem)
         With Cmd
@@ -7579,7 +7579,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         End While
         Conexion.Close()
 
-        Return Lst
+        Return JsonConvert.SerializeObject(Lst)
     End Function
 
 #End Region
