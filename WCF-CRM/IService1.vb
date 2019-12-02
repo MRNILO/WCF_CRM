@@ -2068,6 +2068,11 @@ Public Class VisitasAgenteSem
     Public Visitas As Integer
     <DataMember()>
     Public Semana As Integer
+    <DataMember()>
+    Public ObjetivoSemanas_5 As Integer
+    <DataMember()>
+    Public ObjetivoSemanas_12 As Integer
+
 End Class
 
 

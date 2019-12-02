@@ -7632,6 +7632,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Aux.Agente = DirectCast(Reader.Item("Usuario"), String)
             Aux.Semana = DirectCast(Reader.Item("Semana"), Integer)
             Aux.Visitas = DirectCast(Reader.Item("Visitas"), Integer)
+            Aux.ObjetivoSemanas_5 = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("objUltimas5").ToString()), 0, Reader.Item("objUltimas5")), Integer)
+            Aux.ObjetivoSemanas_12 = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("objUltimas12").ToString()), 0, Reader.Item("objUltimas12")), Integer)
             Lst.Add(Aux)
         End While
         Conexion.Close()
