@@ -565,6 +565,14 @@ Public Interface IService1
 
     <OperationContract()>
     Function Obtener_VisitasAyBXModelo(ByVal FechaFin As Date) As String
+
+    <OperationContract()>
+    Function Obtener_VisitasAyBXMedio(ByVal FechaFin As Date) As String
+
+
+    <OperationContract()>
+    Function Obtener_VisitasAgenteXSemana(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date) As String
+
 #End Region
 
 #Region "Enkontrol"
@@ -2051,6 +2059,17 @@ Public Class VisitasProyMedSem
     <DataMember()>
     Public Semana As Integer
 End Class
+
+<DataContract()>
+Public Class VisitasAgenteSem
+    <DataMember()>
+    Public Agente As String
+    <DataMember()>
+    Public Visitas As Integer
+    <DataMember()>
+    Public Semana As Integer
+End Class
+
 
 <DataContract()>
 Public Class ReporteCalidad
