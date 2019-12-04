@@ -7579,7 +7579,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Lst.Add(Aux)
         End While
         Conexion.Close()
-
         Return JsonConvert.SerializeObject(Lst)
     End Function
 
