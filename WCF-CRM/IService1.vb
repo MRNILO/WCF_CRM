@@ -525,6 +525,9 @@ Public Interface IService1
     Function Obtener_VisitasAyBMedio(ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal Medio As Integer) As List(Of VisitasMedio)
 
     <OperationContract()>
+    Function Obtener_VisitasAyBXAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer
+
+    <OperationContract()>
     Function Obtener_CancelacionesEnkontrol(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of CancelacionesEnkontrol)
 
     <OperationContract()>

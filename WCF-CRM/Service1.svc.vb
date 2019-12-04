@@ -7338,7 +7338,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 
-    Public Function Obtener_VisitasAyBByAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer
+    Public Function Obtener_VisitasAyBXAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer Implements IService1.Obtener_VisitasAyBXAgente
         Dim Result As Integer = 0
         Dim cmd As New SqlCommand("spObtener_VisitasByAgente", Conexion)
         With cmd
