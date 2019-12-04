@@ -7338,6 +7338,27 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 
+    Public Function Obtener_VisitasAyBByAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer
+        Dim Result As Integer = 0
+        Dim cmd As New SqlCommand("spObtener_VisitasByAgente", Conexion)
+        With cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Usuario", Usuario)
+            .Parameters.AddWithValue("@FechaInicio", Fecha_Inicio)
+            .Parameters.AddWithValue(" @FechaFin", Fecha_Fin)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+        Dim reader As SqlDataReader = cmd.ExecuteReader
+        While reader.Read
+            Result = reader.Item("Visitas")
+        End While
+        Conexion.Close()
+
+        Return Result
+    End Function
+
     Public Function Obtener_SeparacionesCRM(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of SeparacionesCRM) Implements IService1.Obtener_SeparacionesCRM
         Dim Resultado As New List(Of SeparacionesCRM)
         Dim cmd As New SqlCommand("Reporte_ObtenerSeparaciones", Conexion)
@@ -7553,6 +7574,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Resultado
     End Function
+
     Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
         Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB_Modelo", Conexion)
         Dim Lst As New List(Of VisitasProyModSem)
@@ -7582,7 +7604,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Lst
     End Function
-
 #End Region
 
 #Region "Enkontrol"
