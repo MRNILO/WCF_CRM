@@ -7338,27 +7338,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 
-    Public Function Obtener_VisitasAyBXAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer Implements IService1.Obtener_VisitasAyBXAgente
-        Dim Result As Integer = 0
-        Dim cmd As New SqlCommand("spObtener_VisitasByAgente", Conexion)
-        With cmd
-            .CommandType = CommandType.StoredProcedure
-            .Parameters.AddWithValue("@Usuario", Usuario)
-            .Parameters.AddWithValue("@FechaInicio", Fecha_Inicio)
-            .Parameters.AddWithValue(" @FechaFin", Fecha_Fin)
-        End With
-
-        Conexion.Close()
-        Conexion.Open()
-        Dim reader As SqlDataReader = cmd.ExecuteReader
-        While reader.Read
-            Result = reader.Item("Visitas")
-        End While
-        Conexion.Close()
-
-        Return Result
-    End Function
-
     Public Function Obtener_SeparacionesCRM(ByVal FechaInicio As Date, ByVal FechaFin As Date) As List(Of SeparacionesCRM) Implements IService1.Obtener_SeparacionesCRM
         Dim Resultado As New List(Of SeparacionesCRM)
         Dim cmd As New SqlCommand("Reporte_ObtenerSeparaciones", Conexion)
@@ -7575,12 +7554,11 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return Resultado
     End Function
 
-    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Inicio As Date, ByVal Fecha_Final As Date) As List(Of VisitasProyModSem) Implements IService1.Obtener_VisitasAyBXModelo
+    Public Function Obtener_VisitasAyBXModelo(ByVal Fecha_Final As Date) As String Implements IService1.Obtener_VisitasAyBXModelo
         Dim Cmd As New SqlCommand("spRepObtener_TotalVisitasAyB_Modelo", Conexion)
         Dim Lst As New List(Of VisitasProyModSem)
         With Cmd
             .CommandType = CommandType.StoredProcedure
-            .Parameters.AddWithValue("@Fecha_Inicio", Fecha_Inicio)
             .Parameters.AddWithValue("@Fecha_Fin", Fecha_Final)
         End With
 
@@ -7601,9 +7579,68 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Lst.Add(Aux)
         End While
         Conexion.Close()
-
-        Return Lst
+        Return JsonConvert.SerializeObject(Lst)
     End Function
+
+    Public Function Obtener_VisitasAyBXMedio(ByVal Fecha_Final As Date) As String Implements IService1.Obtener_VisitasAyBXMedio
+        Dim Cmd As New SqlCommand("spRepObtener_VisitasByProyectoMedioSemana", Conexion)
+        Dim Lst As New List(Of VisitasProyMedSem)
+        With Cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha_Fin", Fecha_Final)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+
+        Dim TotalVisita As Integer = 0
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        Dim Aux As VisitasProyMedSem
+
+        While Reader.Read
+            Aux = New VisitasProyMedSem
+            Aux.Proyecto = DirectCast(Reader.Item("Proyecto"), String)
+            Aux.Medio = DirectCast(Reader.Item("Medio"), String)
+            Aux.Semana = DirectCast(Reader.Item("Semana"), Integer)
+            Aux.Visitas = DirectCast(Reader.Item("Visitas"), Integer)
+            Lst.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return JsonConvert.SerializeObject(Lst)
+    End Function
+
+    Public Function Obtener_VisitasAgenteXSemana(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date) As String Implements IService1.Obtener_VisitasAgenteXSemana
+        Dim Cmd As New SqlCommand("spRepObtener_VisitasProspectador_Coordinador", Conexion)
+        Dim Lst As New List(Of VisitasAgenteSem)
+        With Cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha_Inicio", Fecha_Inicio)
+            .Parameters.AddWithValue("@Fecha_Fin", Fecha_Fin)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+
+        Dim TotalVisita As Integer = 0
+        Dim Reader As SqlDataReader = Cmd.ExecuteReader
+        Dim Aux As VisitasAgenteSem
+
+        While Reader.Read
+            Aux = New VisitasAgenteSem
+            Aux.Agente = DirectCast(Reader.Item("Usuario"), String)
+            Aux.Semana = DirectCast(Reader.Item("Semana"), Integer)
+            Aux.Visitas = DirectCast(Reader.Item("Visitas"), Integer)
+            Aux.ObjetivoSemanas_5 = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("objUltimas5").ToString()), 0, Reader.Item("objUltimas5")), Integer)
+            Aux.ObjetivoSemanas_12 = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("objUltimas12").ToString()), 0, Reader.Item("objUltimas12")), Integer)
+            Lst.Add(Aux)
+        End While
+        Conexion.Close()
+
+        Return JsonConvert.SerializeObject(Lst)
+    End Function
+
+
 #End Region
 
 #Region "Enkontrol"
