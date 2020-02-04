@@ -7640,7 +7640,26 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         Return JsonConvert.SerializeObject(Lst)
     End Function
 
+    Public Function Obtener_VisitasAyBXAgente(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date, ByVal Usuario As String) As Integer Implements IService1.Obtener_VisitasAyBXAgente
+        Dim Result As Integer = 0
+        Dim cmd As New SqlCommand("spObtener_VisitasByAgente", Conexion)
+        With cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Usuario", Usuario)
+            .Parameters.AddWithValue("@FechaInicio", Fecha_Inicio)
+            .Parameters.AddWithValue("@FechaFin", Fecha_Fin)
+        End With
 
+        Conexion.Close()
+        Conexion.Open()
+        Dim reader As SqlDataReader = cmd.ExecuteReader
+        While reader.Read
+            Result = reader.Item("Visitas")
+        End While
+        Conexion.Close()
+
+        Return Result
+    End Function
 #End Region
 
 #Region "Enkontrol"
