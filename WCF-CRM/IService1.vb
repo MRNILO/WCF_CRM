@@ -576,6 +576,8 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_VisitasAgenteXSemana(ByVal Fecha_Inicio As Date, ByVal Fecha_Fin As Date) As String
 
+    <OperationContract()>
+    Function Obtener_ARPAVisitas(ByVal Fecha As Date) As String
 #End Region
 
 #Region "Enkontrol"
@@ -2075,9 +2077,23 @@ Public Class VisitasAgenteSem
     Public ObjetivoSemanas_5 As Integer
     <DataMember()>
     Public ObjetivoSemanas_12 As Integer
-
 End Class
 
+<DataContract()>
+Public Class VisitasARPA
+    <DataMember()>
+    Public Proyecto As String
+    <DataMember()>
+    Public Modelo As String
+    <DataMember()>
+    Public Prog_Anual As Integer
+    <DataMember()>
+    Public Visitas_Acumuladas As Integer
+    <DataMember()>
+    Public Visitas_Semana As Integer
+    <DataMember()>
+    Public Semana_Anterior As Integer
+End Class
 
 <DataContract()>
 Public Class ReporteCalidad
