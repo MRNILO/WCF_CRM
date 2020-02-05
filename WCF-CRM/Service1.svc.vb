@@ -7660,6 +7660,35 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Result
     End Function
+    Public Function Obtener_ARPAVisitas(ByVal Fecha As Date) As String Implements IService1.Obtener_ARPAVisitas
+        Dim cmd As New SqlCommand("spRepObtener_VisitasARPA", Conexion)
+        Dim Lst As New List(Of VisitasARPA)
+        With cmd
+            .CommandType = CommandType.StoredProcedure
+            .Parameters.AddWithValue("@Fecha", Fecha)
+        End With
+
+        Conexion.Close()
+        Conexion.Open()
+        Dim Reader As SqlDataReader = cmd.ExecuteReader
+        Dim Aux As VisitasARPA
+
+        While Reader.Read
+            Aux = New VisitasARPA
+            Aux.Proyecto = DirectCast(Reader.Item("Proyecto"), String)
+            Aux.Modelo = DirectCast(Reader.Item("Modelo"), String)
+            Aux.Prog_Anual = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("Prog_Anual").ToString()), 0, Reader.Item("Prog_Anual")), Integer)
+            Aux.Visitas_Acumuladas = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("A_B_Ano").ToString()), 0, Reader.Item("A_B_Ano")), Integer)
+            Aux.Visitas_Semana = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("A_B_semana").ToString()), 0, Reader.Item("A_B_semana")), Integer)
+            Aux.Semana_Anterior = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("Avance_semana_Anterior").ToString()), 0, Reader.Item("Avance_semana_Anterior")), Integer)
+            Lst.Add(Aux)
+
+        End While
+        Conexion.Close()
+
+        Return JsonConvert.SerializeObject(Lst)
+    End Function
+
 #End Region
 
 #Region "Enkontrol"
