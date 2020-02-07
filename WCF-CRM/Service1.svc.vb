@@ -7676,6 +7676,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         While Reader.Read
             Aux = New VisitasARPA
             Aux.Proyecto = DirectCast(Reader.Item("Proyecto"), String)
+            Aux.Tipo_Casa = DirectCast(Reader.Item("TipoCasa"), Integer)
             Aux.Modelo = DirectCast(Reader.Item("Modelo"), String)
             Aux.Prog_Anual = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("Prog_Anual").ToString()), 0, Reader.Item("Prog_Anual")), Integer)
             Aux.Visitas_Acumuladas = DirectCast(IIf(String.IsNullOrEmpty(Reader.Item("A_B_Ano").ToString()), 0, Reader.Item("A_B_Ano")), Integer)

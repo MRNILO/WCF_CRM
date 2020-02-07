@@ -2084,6 +2084,8 @@ Public Class VisitasARPA
     <DataMember()>
     Public Proyecto As String
     <DataMember()>
+    Public Tipo_Casa As Integer
+    <DataMember()>
     Public Modelo As String
     <DataMember()>
     Public Prog_Anual As Integer
