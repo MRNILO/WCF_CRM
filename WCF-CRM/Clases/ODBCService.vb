@@ -36,6 +36,7 @@ Public Class DirectConn
             With ODBC_DS : .Clear() : .Dispose() : End With
         End Try
     End Function
+
     Public Function ODBCGetDataDbl(ByVal LocalSQL As String, ByVal NumEmp As Integer) As Double
         Try
             ConsODBCConStr(NumEmp)
@@ -58,6 +59,7 @@ Public Class DirectConn
             ODBCcon_A.Close()
         End Try
     End Function
+
     Public Sub ConsODBCConStr(ByVal NumEmp As Integer)
         If NumEmp > 0 Then
             Select Case NumEmp
@@ -75,6 +77,7 @@ Public Class DirectConn
         ODBCcon_A.ConnectionString = ODBCconStr
         ODBCcon_B.ConnectionString = ODBCconStr
     End Sub
+
     Public Function ODBCExecSQL(ByVal LocalSQL As String, ByVal NumEmp As Integer) As Boolean
         Try
             ConsODBCConStr(NumEmp)

@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\ODBCService.vb" />
+    <Compile Include="Clases\SQL_Functions.vb" />
     <Compile Include="Service1.svc.vb">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>

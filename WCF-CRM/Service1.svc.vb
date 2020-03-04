@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Net.Mail
 Imports System.ServiceModel.Activation
+Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 Imports SendGrid
 
@@ -12,6 +13,7 @@ Public Class Service1
     Dim Conexion As New SqlConnection(ConexionStr)
 
     Private ODBC_OBJ As New DirectConn
+    Private GE_SQL As New SQL_Functions
 
 #Region "Error login"
     Function Obtener_nombre_metodo() As String
@@ -6932,6 +6934,10 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Reportes"
+    Public Function Obtener_DatosConsulta(ByVal Query As String) As DataTable Implements IService1.Obtener_DatosConsulta
+        Return GE_SQL.SQLGetTable(Query)
+    End Function
+
     Public Function Obtener_MediosCampanas() As List(Of MediosCampana) Implements IService1.Obtener_MediosCampanas
         Dim Aux As MediosCampana
         Dim Lst As New List(Of MediosCampana)
@@ -7660,6 +7666,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return Result
     End Function
+
     Public Function Obtener_ARPAVisitas(ByVal Fecha As Date) As String Implements IService1.Obtener_ARPAVisitas
         Dim cmd As New SqlCommand("spRepObtener_VisitasARPA", Conexion)
         Dim Lst As New List(Of VisitasARPA)
@@ -7689,9 +7696,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
 
         Return JsonConvert.SerializeObject(Lst)
     End Function
-
 #End Region
-
 #Region "Enkontrol"
     Public Function Obtener_OrigenAgente(ByVal Empleado As Integer) As List(Of OrigenAgente)
         Dim Query As String = "SELECT direccion_archivo
@@ -7712,7 +7717,6 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         DS.Clear() : DS.Dispose()
     End Function
 #End Region
-
 #Region "Comisiones"
     Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
         Try

@@ -513,6 +513,9 @@ Public Interface IService1
 #End Region
 #Region "Reportes"
     <OperationContract()>
+    Function Obtener_DatosConsulta(ByVal Query As String) As DataTable
+
+    <OperationContract()>
     Function Obtener_MediosCampanas() As List(Of MediosCampana)
 
     <OperationContract()>
@@ -579,11 +582,9 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_ARPAVisitas(ByVal Fecha As Date) As String
 #End Region
-
 #Region "Enkontrol"
 
 #End Region
-
 #Region "Usuarios"
     <OperationContract()>
     Function Obtener_TipoUsuario() As List(Of TipoUsuario)
@@ -594,7 +595,6 @@ Public Interface IService1
     <OperationContract()>
     Function ObtenerAgentes_CallCenter(ByVal Tipo As Integer) As String
 #End Region
-
 #Region "Comisiones"
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
@@ -2021,6 +2021,16 @@ End Class
 #End Region
 
 #Region "Reportes"
+<DataContract()>
+Public Class DatosConsulta
+    <DataMember()>
+    Public DT As DataTable
+    <DataMember()>
+    Public Resultado As String
+    <DataMember()>
+    Public Mensaje As String
+End Class
+
 <DataContract()>
 Public Class MediosCampana
     <DataMember()>
