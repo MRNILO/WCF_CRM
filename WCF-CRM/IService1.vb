@@ -167,6 +167,9 @@ Public Interface IService1
                                       ByVal IdCampana As Integer, ByVal IdImpedimento As Integer, ByVal TipoCredito As String, ByVal Monto As Double, ByVal Ranking As String,
                                       ByVal Origen As String, ByVal Proyecto As String, ByVal Modelo As Integer, ByVal TipoCampana As String, ByVal VigenciaIncial As Date,
                                       ByVal VigenciaFinal As Date, ByVal FechaVisita As Date, ByVal Status As Integer) As Boolean
+
+    <OperationContract()>
+    Function Obtener_TipoVisita() As DataSet
 #End Region
 #Region "Configuraciones"
     <OperationContract()>
@@ -513,7 +516,7 @@ Public Interface IService1
 #End Region
 #Region "Reportes"
     <OperationContract()>
-    Function Obtener_DatosConsulta(ByVal Query As String) As DataTable
+    Function Obtener_DatosConsulta(ByVal Query As String) As DataSet
 
     <OperationContract()>
     Function Obtener_MediosCampanas() As List(Of MediosCampana)

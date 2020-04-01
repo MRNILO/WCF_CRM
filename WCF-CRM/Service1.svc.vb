@@ -1941,6 +1941,11 @@ Public Class Service1
         Conexion.Close()
         Return False
     End Function
+
+    Function Obtener_TipoVisita() As DataSet Implements IService1.Obtener_TipoVisita
+        Dim Query As String = "EXEC [dbo].[spObtener_TipoVisita]"
+        Return GE_SQL.SQlGetDataset(Query)
+    End Function
 #End Region
 #Region "Configuraciones"
     Function Actualiza_configuraciones(ByVal id_configuracion As Integer, ByVal diasDeGracias As Integer, ByVal emailSistema As String, ByVal contraseñaEmail As String, ByVal smtpServer As String, ByVal puertoEmail As Integer, ByVal SSL As String, ByVal EnviarEmails As String) As Boolean Implements IService1.Actualiza_configuraciones
@@ -6934,8 +6939,8 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Reportes"
-    Public Function Obtener_DatosConsulta(ByVal Query As String) As DataTable Implements IService1.Obtener_DatosConsulta
-        Return GE_SQL.SQLGetTable(Query)
+    Public Function Obtener_DatosConsulta(ByVal Query As String) As DataSet Implements IService1.Obtener_DatosConsulta
+        Return GE_SQL.SQlGetDataset(Query)
     End Function
 
     Public Function Obtener_MediosCampanas() As List(Of MediosCampana) Implements IService1.Obtener_MediosCampanas
