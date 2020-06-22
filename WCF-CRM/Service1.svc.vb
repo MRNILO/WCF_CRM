@@ -7765,7 +7765,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         End Try
     End Function
 
-    Public Function Obtener_IndicadoresComisiones_Prospectador_Complemento(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador_Complemento
+    Public Function Obtener_IndicadoresComisiones_Prospectador_Complemento(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador_Complemento
         Try
             Dim Resultado As New List(Of Indicadores)
             Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion_Escrituracion", Conexion)
@@ -7773,6 +7773,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
             cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
             cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            cmd.Parameters.AddWithValue("@PEmpresa", NumEmpresa)
             Conexion.Close()
             Conexion.Open()
             Dim reader As SqlDataReader = cmd.ExecuteReader
