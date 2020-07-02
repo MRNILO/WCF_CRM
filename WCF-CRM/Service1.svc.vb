@@ -7723,7 +7723,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
     End Function
 #End Region
 #Region "Comisiones"
-    Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
+    Public Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador
         Try
             Dim Resultado As New List(Of Indicadores)
             Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion", Conexion)
@@ -7731,6 +7731,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
             cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
             cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            cmd.Parameters.AddWithValue("@PEmpresa", NumEmpresa)
             Conexion.Close()
             Conexion.Open()
             Dim reader As SqlDataReader = cmd.ExecuteReader
@@ -7811,7 +7812,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
         End Try
     End Function
 
-    Public Function Obtener_IndicadoresComisiones_CallCenter(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_CallCenter
+    Public Function Obtener_IndicadoresComisiones_CallCenter(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String Implements IService1.Obtener_IndicadoresComisiones_CallCenter
         Try
             Dim Resultado As New List(Of Indicadores)
             Dim cmd As New SqlCommand("Obtener_IndicadoresCallCenter", Conexion)
@@ -7819,6 +7820,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
             cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
             cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            cmd.Parameters.AddWithValue("@PEmpresa", NumEmpresa)
             Conexion.Close()
             Conexion.Open()
             Dim reader As SqlDataReader = cmd.ExecuteReader
