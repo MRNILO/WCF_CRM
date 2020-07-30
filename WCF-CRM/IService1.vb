@@ -602,6 +602,10 @@ Public Interface IService1
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String
     <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Prospectador_Visitas(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String
+    <OperationContract()>
+    Function Obtener_IndicadoresComisiones_Prospectador_Separaciones(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String
+    <OperationContract()>
     Function Obtener_IndicadoresComisiones_Prospectador_Complemento(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String
     <OperationContract()>
     Function Obtener_IndicadoresComisiones_CallCenter(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String
@@ -2387,6 +2391,8 @@ End Class
 <DataContract()>
 Public Class Indicadores
     <DataMember()>
+    Public Id_Visita As String
+    <DataMember()>
     Public Empresa As String
     <DataMember()>
     Public Empleado As String
@@ -2422,5 +2428,9 @@ Public Class Indicadores
     Public cliente As String
     <DataMember()>
     Public clienteEK As String
+    <DataMember()>
+    Public FechaVisita As Date
+    <DataMember()>
+    Public FechaSeparacion As Date
 End Class
 #End Region

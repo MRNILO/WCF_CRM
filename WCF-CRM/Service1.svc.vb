@@ -7739,7 +7739,7 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Dim int = 1
             While reader.Read
                 Aux = New Indicadores
-                Aux.Empresa = reader.Item("empresa")
+                Aux.Empresa = If(String.IsNullOrEmpty(reader.Item("empresa").ToString), "", reader.Item("empresa"))
                 Aux.Nombre_Completo_Empleado = reader.Item("nombre")
                 Aux.Nombre_Cliente = reader.Item("nombre_cliente")
                 Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
@@ -7765,6 +7765,104 @@ System.Globalization.CultureInfo.GetCultureInfo("es-MX")
             Throw New FaultException(ex.Message)
         End Try
     End Function
+
+    Public Function Obtener_IndicadoresComisiones_Prospectador_Visitas(ByVal FechaInicio As Date, ByVal FechaFin As Date) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador_Visitas
+        Try
+            Dim Resultado As New List(Of Indicadores)
+            Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion_Visitas", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+            cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As Indicadores
+            Dim int = 1
+            While reader.Read
+                Aux = New Indicadores
+                Aux.Id_Visita = reader.Item("Id_Visita")
+                Aux.Empresa = If(String.IsNullOrEmpty(reader.Item("empresa").ToString), "", reader.Item("empresa"))
+                Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Nombre_Cliente = reader.Item("nombre_cliente")
+                Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
+                Aux.apMaterno_Cliente = reader.Item("ap_Materno_cliente")
+                Aux.cliente = reader.Item("cliente")
+                Aux.clienteEK = reader.Item("Numcte")
+                Aux.Empleado = reader.Item("usuario")
+                If IsDBNull(reader.Item("FechaVisita")) Then
+                    Aux.FechaVisita = "1900-01-01"
+                Else
+                    Aux.FechaVisita = DirectCast(reader.Item("FechaVisita"), Date)
+                End If
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
+                Aux.Modelo = reader.Item("Modelo")
+                Aux.Proyecto = reader.Item("Proyecto")
+                Aux.NombreCorto = reader.Item("NombreCorto")
+                Aux.CC = If(String.IsNullOrEmpty(reader.Item("CC").ToString), "", reader.Item("CC"))
+                Aux.Status_Agente = reader.Item("Status_Agente")
+                Resultado.Add(Aux)
+                int = int + 1
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Resultado)
+
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+
+    Public Function Obtener_IndicadoresComisiones_Prospectador_Separaciones(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador_Separaciones
+        Try
+            Dim Resultado As New List(Of Indicadores)
+            Dim cmd As New SqlCommand("Obtener_IndicadoresProspeccion_Separaciones", Conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio)
+            cmd.Parameters.AddWithValue("@FechaFin", FechaFin)
+            cmd.Parameters.AddWithValue("@ListadoUsuarios", ListadoUsuarios)
+            cmd.Parameters.AddWithValue("@PEmpresa", NumEmpresa)
+            Conexion.Close()
+            Conexion.Open()
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim Aux As Indicadores
+            Dim int = 1
+            While reader.Read
+                Aux = New Indicadores
+                Aux.Empresa = If(String.IsNullOrEmpty(reader.Item("empresa").ToString), "", reader.Item("empresa"))
+                Aux.Nombre_Completo_Empleado = reader.Item("nombre")
+                Aux.Nombre_Cliente = reader.Item("nombre_cliente")
+                Aux.apPaterno_Cliente = reader.Item("ap_Paterno_cliente")
+                Aux.apMaterno_Cliente = reader.Item("ap_Materno_cliente")
+                Aux.cliente = reader.Item("cliente")
+                Aux.clienteEK = reader.Item("Numcte")
+                Aux.Empleado = reader.Item("usuario")
+                If IsDBNull(reader.Item("FechaSeparacion")) Then
+                    Aux.FechaSeparacion = "1900-01-01"
+                Else
+                    Aux.FechaSeparacion = DirectCast(reader.Item("FechaSeparacion"), Date)
+                End If
+                Aux.NumSeparaciones = If(IsDBNull(reader.Item("separaciones")), 0, Convert.ToInt32(reader.Item("separaciones")))
+                Aux.NumVisitas = If(IsDBNull(reader.Item("visitas")), 0, Convert.ToInt32(reader.Item("visitas")))
+                Aux.Modelo = reader.Item("Modelo")
+                Aux.Proyecto = reader.Item("Proyecto")
+                Aux.NombreCorto = reader.Item("NombreCorto")
+                Aux.CC = If(String.IsNullOrEmpty(reader.Item("CC").ToString), "", reader.Item("CC"))
+                Aux.Status_Agente = reader.Item("Status_Agente")
+                Resultado.Add(Aux)
+                int = int + 1
+            End While
+            Conexion.Close()
+
+            Return JsonConvert.SerializeObject(Resultado)
+
+        Catch ex As Exception
+            Throw New FaultException(ex.Message)
+        End Try
+    End Function
+
+
+
 
     Public Function Obtener_IndicadoresComisiones_Prospectador_Complemento(ByVal ListadoUsuarios As String, ByVal FechaInicio As Date, ByVal FechaFin As Date, ByVal NumEmpresa As Integer) As String Implements IService1.Obtener_IndicadoresComisiones_Prospectador_Complemento
         Try
